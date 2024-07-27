@@ -1,19 +1,9 @@
 <app-header></app-header>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:title" content="{{ productful?.title }}">
-  <meta property="og:description" content="{{ productful?.description }}">
-  <meta property="og:image" content="{{ productful?.image0 }}">
-  <meta property="og:url" content="{{ router.url }}">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ productful?.title }}">
-  <meta name="twitter:description" content="{{ productful?.description }}">
-  <meta name="twitter:image" content="{{ productful?.image0 }}">
-</head>
+
 <div class="product">
   <div class="share-buttons">
     <!-- Nút chia sẻ Facebook -->
-    <a class="fb-share-button" [attr.data-href]="'https://brave-mud-016dc860f.5.azurestaticapps.net/product/C%C3%A2y-Cam-Ng%E1%BB%8Dt-C%E1%BB%A7a-T%C3%B4i-B2016'" data-layout="button_count">Share on Facebook</a>
+    <a class="fb-share-button" [attr.data-href]="currentUrl" data-layout="button_count">Share on Facebook</a>
 </div>
 
   <div class="container" *ngIf="productful">

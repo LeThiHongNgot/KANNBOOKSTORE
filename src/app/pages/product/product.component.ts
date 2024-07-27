@@ -107,25 +107,27 @@ export class ProductComponent implements OnInit {
           this.checkedProductIds = [];
           this.selectedImage='';
           this.productsPrice={}
-          if( this.productful)
-          {
-          this.title.setTitle(this.productful.title);
-          this.meta.updateTag({ name: 'description', content: this.productful.description });
-          this.meta.updateTag({ name: 'keywords', content: this.productful.keywords.join(', ') });
-          this.meta.updateTag({ property: 'og:title', content: this.productful.title });
-          this.meta.updateTag({ property: 'og:description', content: this.productful.description });
-          this.meta.updateTag({ property: 'og:image', content: this.productful.image0 });
-          this.meta.updateTag({ property: 'og:url', content: this.router.url });
-          this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-          this.meta.updateTag({ name: 'twitter:title', content: this.productful.title });
-          this.meta.updateTag({ name: 'twitter:description', content: this.productful.description });
-          this.meta.updateTag({ name: 'twitter:image', content: this.productful.image0 });
-          }
+          this.updateMetaTags();
+          console.log(this.updateMetaTags())
         }
       }
     });
   }
-
+  private updateMetaTags(): void {
+    if (this.productful) {
+      this.title.setTitle(this.productful.title);
+      this.meta.updateTag({ name: 'description', content: this.productful.description });
+      this.meta.updateTag({ name: 'keywords', content: this.productful.keywords.join(', ') });
+      this.meta.updateTag({ property: 'og:title', content: this.productful.title });
+      this.meta.updateTag({ property: 'og:description', content: this.productful.description });
+      this.meta.updateTag({ property: 'og:image', content: this.productful.image0 });
+      this.meta.updateTag({ property: 'og:url', content: this.currentUrl });
+      this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+      this.meta.updateTag({ name: 'twitter:title', content: this.productful.title });
+      this.meta.updateTag({ name: 'twitter:description', content: this.productful.description });
+      this.meta.updateTag({ name: 'twitter:image', content: this.productful.image0 });
+    }
+  }
 getproductid()
 {
     if (this.productId) {
