@@ -8,8 +8,7 @@ import { Author } from 'src/interfaces/Author';
 import { Category } from 'src/interfaces/Category';
 import { SharedataService } from 'src/services/sharedata/sharedata.service';
 import { CustomerService } from 'src/services/customer/customer.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { MatIconModule } from '@angular/material/icon';
+import{ BookDetailsViewModel} from 'src/interfaces/fullbook'
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -19,36 +18,14 @@ export class HeaderComponent {
   idcustomer: string | null = null;
   product: any = {}
   constructor(private http: HttpClient, private router: Router, private sharedata: SharedataService, private customer: CustomerService) { }
-  data: bookhome[] = [];
+  data:  BookDetailsViewModel[] = [];
   bookImage: bookimg[] = [];
   author: Author | null = null;
-  filteredProducts: bookhome[] = [];
+  filteredProducts:  BookDetailsViewModel[] = [];
   categories: Category[] = [];
 
   ngOnInit() {
     // Make a GET request to fetch book data
-    this.http.get<bookhome[]>('https://qlchs20240725164709.azurewebsites.net/api/Books').subscribe({
-      next: response => {
-        if (response) {
-          this.data = response;
-        }
-      },
-      error: error => {
-        console.error('Lỗi xảy ra khi lấy dữ liệu sách', error);
-      }
-    });
-    this.http.get<bookimg[]>(`https://qlchs20240725164709.azurewebsites.net/api/Bookimgs?`).subscribe(
-      {
-        next: response => {
-          // Store the image in the bookImage object with the book ID as the key
-          if (response) {
-            this.bookImage = response;
-          }
-        },
-        error: error => {
-          console.error('Lỗi xảy ra khi lấy dữ liệu hình ảnh', error);
-        }
-      });
     this.http.get<Category[]>(`https://qlchs20240725164709.azurewebsites.net/api/Categories?`).subscribe(
       {
         next: response => {
@@ -88,6 +65,16 @@ export class HeaderComponent {
     }
   }
   loadpro(name: string): void {
+    this.http.get< BookDetailsViewModel[]>('https://qlchs20240725164709.azurewebsites.net/api/Books/details/imgaes').subscribe({
+      next: response => {
+        if (response) {
+          this.data = response;
+        }
+      },
+      error: error => {
+        console.error('Lỗi xảy ra khi lấy dữ liệu sách', error);
+      }
+    });
     if (name) {
       (document.querySelector(".dropdown") as HTMLElement).style.display = 'flex';
       this.filteredProducts = this.data.filter((product) =>
@@ -111,10 +98,6 @@ export class HeaderComponent {
     this.isMapModalVisible = false;
   }
 
-  getBookImage(bookId: string): string {
-    const matchingImage = this.bookImage.find((bookImage) => bookImage.bookId === bookId);
-    return matchingImage ? matchingImage.image0 : '';
-  }
   navigateToProduct(productId: string) {
     (document.querySelector(".dropdown") as HTMLElement).style.display = 'none'
     const sanitizedProductId = productId.replace(/\s+/g, '');

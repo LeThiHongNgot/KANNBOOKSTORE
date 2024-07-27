@@ -34,9 +34,7 @@ export class HomeComponent {
   loadedBooksCount: number = 0;
   ngOnInit() {
     this.getProductDetailsoutstanding(this.page, this.pageSize)
-
     this.getProductsuggest()
-    console.log(this.lenghtBook)
   }
   getProductDetailsoutstanding(page: number, pageSize: number): void {
     this.books.getBookoutstanding(page, pageSize).subscribe({
@@ -56,11 +54,6 @@ export class HomeComponent {
       error: (err) => {
       },
     });
-  }
-
-  getBookImage(bookId: string): string {
-    const matchingImage = this.img.find((img) => img.bookId === bookId);
-    return matchingImage ? matchingImage.image0 : ''; // Return the image URL if found, otherwise an empty string
   }
 
   //-------------------------------thay đôi số page khi chuyển trang

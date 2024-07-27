@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { forkJoin, Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { bookimg } from '../../../interfaces/bookimg';
 import { Author } from '../../../interfaces/Author';
 import { Category } from '../../../interfaces/Category';
@@ -19,7 +17,6 @@ import { CustomerService } from 'src/services/customer/customer.service';
 import {BookDetailsViewModel} from 'src/interfaces/fullbook';
 import { ProductViewService } from 'src/services/ProductView/product-view.service';
 import { ProductReviewBookid } from 'src/interfaces/ProductView';
-import { SharedataService } from 'src/services/sharedata/sharedata.service';
 @Component({ selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
@@ -63,7 +60,6 @@ export class ProductComponent implements OnInit {
     private cartsService:CartsService,
     private customer: CustomerService,
     private productView:ProductViewService,
-    private sharedata:SharedataService,
     //rating-comment
     config: NgbModalConfig,
 		private modalService: NgbModal,
@@ -118,7 +114,6 @@ getproductid()
         this.books.getBookDetailsWithImagesid(this.productId).subscribe({
           next:(res)=>
           {
-            console.log('API Response:', res);
             this.productful = res;
             this.idCategory = res.catergoryID;
             this.productsPrice[res.bookId]=(1-res.pricePercent)*res.unitPrice;
@@ -142,7 +137,6 @@ getRatingStatistical()
     this.productView.getProductReviewRatingBookId(this.productId).subscribe({
       next: (response) => {
         this.ratingStatistical=response
-        console.log(this.ratingStatistical)
         this.totalVotes = this.calculateTotalVotesRatingAcount(this.ratingStatistical);
       },
       error: (error: any) => {
@@ -151,27 +145,13 @@ getRatingStatistical()
     });
   }
 }
-sameCategory(page: number = 1) {
+sameCategory(page: number) {
   this.books.getBookdetailsByCategory(this.idCategory, page, this.pageSize)
     .subscribe({
       next: (response) => {
-        // Ensure that response has 'data' property and it is an array
         if (response && response.data && Array.isArray(response.data)) {
           this.productSameCategoryID = response.data;
           this.loadedBooksCount = response.totalCount;
-
-          // Create an array of observables for each product
-          const observables = this.productSameCategoryID.map((book) =>
-            this.getAvergaProductRating(book.bookId)
-          );
-
-          // Use forkJoin to combine observables into a single observable
-          forkJoin(observables).subscribe((ratings) => {
-            // Assign each rating to its corresponding book
-            ratings.forEach((rating, index) => {
-              this.productSameCategoryID[index].averageRating1 = rating !== null ? rating : 0;
-            });
-          });
         } else {
           console.error('Invalid response format:', response);
         }
@@ -182,21 +162,10 @@ sameCategory(page: number = 1) {
     });
 }
 
-getAvergaProductRating(productId: string): Observable<number | null> {
-  return this.productView.getProductReviewaAveragBookId(productId)
-    .pipe(
-      catchError((error: any) => {
-        console.error(`${productId}:`, error);
-        // Set a default value of null when there's an error or the rating is not found
-        return of(null);
-      })
-    );
-}
 
 addCart()
 {
   this.idcustomer=this.customer.getClaimValue();
- console.log( this.productId+this.idcustomer)
   const dataCart={
     id: this.productId+this.idcustomer,
     bookId:this.productId ,
@@ -249,7 +218,6 @@ portratingcommen()
     ngayCommemt: new Date(),
 
   }
-  console.log(dataProductView)
   this.productView.addProductReview(dataProductView).subscribe({
     next: (res) => {
       this.getProductView()
@@ -258,7 +226,7 @@ portratingcommen()
       this.getProductReviewaAverag(this.productId);
       }
       this.getRatingStatistical();
-      this.sameCategory()
+      this.sameCategory(1)
      alert('Bình luận thành công');
     },
     error: (err) => {

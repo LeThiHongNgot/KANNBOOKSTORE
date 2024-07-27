@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+Disallow: /private/
+Sitemap: https://brave-mud-016dc860f.5.azurestaticapps.net

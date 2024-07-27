@@ -10,8 +10,6 @@ import { BookDetail } from 'src/interfaces/bookdetail';
 import { BooksService } from 'src/services/Books/books.service';
 import { BookDetailsService } from 'src/services/BookDetails/bookdetails.service';
 import { BookDetailsViewModel } from 'src/interfaces/fullbook';
-import { forkJoin, Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { ProductViewService } from 'src/services/ProductView/product-view.service';
 @Component({
   selector: 'app-category',
@@ -46,7 +44,7 @@ export class CategoryComponent implements OnInit {
     if (categoryId) {
       this.caId = categoryId;
       this.loadBooks(1);
-      this.http.get<Author[]>(`https://localhost:7009/api/Authors`).subscribe(
+      this.http.get<Author[]>(`https://qlchs20240725164709.azurewebsites.net/api/Authors`).subscribe(
         {
           next: response => {
             this.author = response;
@@ -89,40 +87,20 @@ export class CategoryComponent implements OnInit {
   filterProductsByPrice(priceRange: string | "") {
     this.OptionAuthor = "";
     if (priceRange === "") {
-      // if(!this.booksall || this.booksall.length === 0)
-      // {
       this.booksPagination = this.backupData;
       return;
-      // }else
-      // {
-      // this.booksall = this.backupData;
-      //   return;
-      // }
     } else {
       const [minPrice, maxPrice] = this.getPriceRangeValues(priceRange);
-      // if(this.booksall==null)
-      // {
       this.booksPagination = this.backupData.filter(product => {
         return product.unitPrice >= minPrice && product.unitPrice <= maxPrice;
       });
-      //}
-      // else
-      // {
-      //   this.booksPagination = this.backupData.filter(product => {
-      //     return product.unitPrice >=  minPrice && product.unitPrice <= maxPrice;
-      //   });
-      // }
     }
 
   }
 
   extractUniqueAuthorIds() {
     let authorIds = null;
-    //if (!this.booksall || this.booksall.length === 0) {
     authorIds = this.booksPagination.map(product => product.authorId);
-    //} else {
-    // authorIds = this.booksall.map(product => product.authorId);
-    //}
     if (authorIds !== null) {
       this.uniqueAuthorIds = Array.from(new Set(authorIds));
     }
@@ -132,29 +110,10 @@ export class CategoryComponent implements OnInit {
     this.sortOptionprice = "0";
     this.Optionprice = "";
     if (authorId !== '') {
-      // if(!this.booksall || this.booksall.length === 0)
-      //{
       this.booksPagination = this.backupData.filter(product => product.authorId === authorId);
       return;
-      // }
-      // else
-      // {
-      //   this.booksall  = this.backupData.filter(product => product.authorId === authorId);
-      //   return;
-      // }
-
     } else {
-
-      //if(!this.booksall || this.booksall.length === 0)
-      // {
       this.booksPagination = this.backupData
-
-      // }
-      // else
-      // {
-      //   this.booksall  = this.backupData;
-      //   return;
-      // }
     }
   }
 
@@ -170,22 +129,13 @@ export class CategoryComponent implements OnInit {
               this.backupData = this.booksPagination,
                 this.extractUniqueAuthorIds(),
                 this.categoryname = response.data[0].categoryName
-              const observables = this.booksPagination.map((book) =>
-                this.getAvergaProductRating(book.bookId),
-              );
-
               this.booksPagination.forEach((book, index) => {
                 const authorId = book.authorId;
                 const authorName = book.authorName;
                 this.arrayAuthor.set(authorId, authorName);
               });
-              // Use forkJoin to combine observables into a single observable
-              forkJoin(observables).subscribe((ratings) => {
-                // Assign each rating to its corresponding book
-                ratings.forEach((rating, index) => {
-                  this.booksPagination[index].averageRating = rating !== null ? rating : 0;
-                });
-              });
+              
+
             }
           },
           error: (error: any) => { // Explicitly type 'error'
@@ -194,17 +144,7 @@ export class CategoryComponent implements OnInit {
         });
     }
   }
-  // gọi trung bình đánh giá của sách với id cụ thể
-  getAvergaProductRating(productId: string): Observable<number | null> {
-    return this.productView.getProductReviewaAveragBookId(productId)
-      .pipe(
-        catchError((error: any) => {
-          console.error(`${productId}:`, error);
-          // Set a default value of null when there's an error or the rating is not found
-          return of(null);
-        })
-      );
-  }
+
   // tính tiền của sách với phần trăm giảm
   percent1(price: number, per: number): number {
     return price * (1 - per);

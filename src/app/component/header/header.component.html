@@ -15,9 +15,9 @@
             </button>
             <div class="dropdown" id="dropdown">
                 <div class="cartegory-right-bottom-item" *ngFor="let product of filteredProducts"
-                    (click)="navigateToProduct(product.id)">
+                    (click)="navigateToProduct(product.bookId)">
                     <div class="productIMG">
-                        <img [src]="getBookImage(product.id)">
+                        <img [src]="product.image0">
                     </div>
                     <span class=" btn-outline-secondary" placement="bottom" ngbTooltip={{product.title}}>{{
                         product.title }}</span>
