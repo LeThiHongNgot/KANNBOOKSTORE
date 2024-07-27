@@ -70,6 +70,7 @@ export class ProductComponent implements OnInit {
       config.backdrop = 'static';
       config.keyboard = false;
     }
+    
     //modal-rating
    open(content:any)
     {
@@ -100,7 +101,10 @@ export class ProductComponent implements OnInit {
         // Sử dụng productId để tải thông tin sản phẩm
         if (this.productId) {
           this.getproductid();
-          this.getProductReviewaAverag(this.productId);
+        if (this.productful) {
+          this.updateMetaTags();
+        }
+      
           this.onPageChange(this.page);
           this.sameCategory(1);
           this.quantity = {};
@@ -111,7 +115,17 @@ export class ProductComponent implements OnInit {
       }
     });
   }
-
+  private updateMetaTags(): void {
+    if (this.productful) {
+      this.title.setTitle(this.productful.title);
+      this.meta.updateTag({ property: 'og:title', content: this.productful.title });
+      this.meta.updateTag({ property: 'og:image', content: this.productful.image0 });
+      this.meta.updateTag({ property: 'og:url', content: this.currentUrl });
+      console.log(this.meta.getTag('property="og:title"'));
+      console.log(this.meta.getTag('property="og:image"'));
+      console.log(this.meta.getTag('property="og:url"'));
+    }
+  }
 getproductid()
 {
     if (this.productId) {
@@ -122,15 +136,11 @@ getproductid()
             this.idCategory = res.catergoryID;
             this.productsPrice[res.bookId]=(1-res.pricePercent)*res.unitPrice;
             this.maxquantity = res.quantity ?? 0;
-            console.log(this.maxquantity)
+            this.averageRating=res.averageRating
             this.checkedProductIds.push(res.bookId);
             this.sameCategory(1);
             this.getProductView();
-            this.title.setTitle(this.productful.title);
-            this.meta.updateTag({ property: 'og:title', content: this.productful.title });
-            this.meta.updateTag({ property: 'og:description', content: this.productful.description });
-            this.meta.updateTag({ property: 'og:image', content: this.productful.image0 });
-            this.meta.updateTag({ property: 'og:url', content: this.currentUrl });            
+
           },
           error:(err)=>
           {
@@ -182,7 +192,8 @@ addCart()
   }
     this.cartsService.addCarts(dataCart).subscribe({
       next: (res: any[]) => {
-       alert('Thêm vào giỏ hàng thành công')
+       alert('Thêm vào giỏ hàng thành công');
+       this.getproductid()
       },
       error: (err) => {
         alert('Sản phẩm đã được thêm vào giỏ hàng')
@@ -203,17 +214,7 @@ getProductView()
     });
   }
 }
-getProductReviewaAverag(productId:string)
-{
-  this.productView.getProductReviewaAveragBookId(productId).subscribe({
-    next: (response) => {
-      this.averageRating=response
-    },
-    error: (error: any) => {
-      console.error('Error loading books:', error);
-    }
-  });
-}
+
 portratingcommen()
 {
   this.idcustomer=this.customer.getClaimValue();
@@ -232,7 +233,7 @@ portratingcommen()
       this.getProductView()
       if(this.productId)
       {
-      this.getProductReviewaAverag(this.productId);
+      
       }
       this.getRatingStatistical();
       this.sameCategory(1)
