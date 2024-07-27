@@ -17,7 +17,7 @@ import { CustomerService } from 'src/services/customer/customer.service';
 import {BookDetailsViewModel} from 'src/interfaces/fullbook';
 import { ProductViewService } from 'src/services/ProductView/product-view.service';
 import { ProductReviewBookid } from 'src/interfaces/ProductView';
-@Component({ selector: 'app-product',
+import { Meta, Title } from '@angular/platform-browser';@Component({ selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
   providers: [ NgbModalConfig, NgbModal,NgbRatingConfig, NgbTypeaheadModule, FormsModule, JsonPipe, NgbRatingModule ]
@@ -27,6 +27,7 @@ export class ProductComponent implements OnInit {
   page = 1;
   // model:any
   product:  | null = null;
+  currentUrl: string='';
   productful: BookDetailsViewModel| null = null;
   productSameCategoryID: any[] = [];
   imgID: bookimg | null = null;
@@ -56,10 +57,12 @@ export class ProductComponent implements OnInit {
   productName:string| null=null;
   constructor(
     private route: ActivatedRoute,
-    private router: Router, private books: BooksService,
+    public router: Router, private books: BooksService,
     private cartsService:CartsService,
     private customer: CustomerService,
     private productView:ProductViewService,
+    private meta: Meta,
+    private title: Title,
     //rating-comment
     config: NgbModalConfig,
 		private modalService: NgbModal,
@@ -87,6 +90,7 @@ export class ProductComponent implements OnInit {
     this.selectedImage = imageUrl;
   }
   ngOnInit(): void {
+    this.currentUrl = this.router.url;
     this.route.paramMap.subscribe(params => {
       const combinedParam = params.get('combinedParam');
       if (combinedParam) {
@@ -103,6 +107,20 @@ export class ProductComponent implements OnInit {
           this.checkedProductIds = [];
           this.selectedImage='';
           this.productsPrice={}
+          if( this.productful)
+          {
+          this.title.setTitle(this.productful.title);
+          this.meta.updateTag({ name: 'description', content: this.productful.description });
+          this.meta.updateTag({ name: 'keywords', content: this.productful.keywords.join(', ') });
+          this.meta.updateTag({ property: 'og:title', content: this.productful.title });
+          this.meta.updateTag({ property: 'og:description', content: this.productful.description });
+          this.meta.updateTag({ property: 'og:image', content: this.productful.image0 });
+          this.meta.updateTag({ property: 'og:url', content: this.router.url });
+          this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+          this.meta.updateTag({ name: 'twitter:title', content: this.productful.title });
+          this.meta.updateTag({ name: 'twitter:description', content: this.productful.description });
+          this.meta.updateTag({ name: 'twitter:image', content: this.productful.image0 });
+          }
         }
       }
     });

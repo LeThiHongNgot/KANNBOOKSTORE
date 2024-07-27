@@ -5,15 +5,23 @@
   <title>KANN BOOKSTORE</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="{{ productful.title }}">
+    <meta property="og:description" content="{{ productful.description }}">
+    <meta property="og:image" content="{{ productful.image0 }}">
+    <meta property="og:url" content="{{ router.url }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ productful.title }}">
+    <meta name="twitter:description" content="{{ productful.description }}">
+    <meta name="twitter:image" content="{{ productful.image0 }}">
 
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <!--Start of AutoAds Tracking Code-->
-<script id='autoAdsMaxLead-widget-script' src='https://cdn-onmar.novaontech.com/scripts/autoads-maxlead-widget.js?business_id=B77F433E3C724B729478943AAD5F6680' type='text/javascript' charset='UTF-8' async></script>
-<!--End of AutoAds Tracking Code-->
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0" nonce="4VZtb90k"></script>
   <script
     src="https://www.paypal.com/sdk/js?client-id=ARfaPhKNIBbZ0jcfH1D0wjgog7O63aXGP70TrCCArc1bpOw-MTp0pje6-JdMgPIyqPOu2hvdfuZT4NHs&currency=USD"></script>
+    <script id='autoAdsMaxLead-widget-script' src='https://cdn-onmar.novaontech.com/scripts/autoads-maxlead-widget.js?business_id=B77F433E3C724B729478943AAD5F6680' type='text/javascript' charset='UTF-8' defer></script>
+
 </head>
 <body class="mat-typography">
   <app-root></app-root>
