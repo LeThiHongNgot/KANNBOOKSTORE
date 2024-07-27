@@ -27,7 +27,7 @@ export class HeaderComponent {
 
   ngOnInit() {
     // Make a GET request to fetch book data
-    this.http.get<bookhome[]>('https://localhost:7009/api/Books').subscribe({
+    this.http.get<bookhome[]>('https://qlchs20240725164709.azurewebsites.net/api/Books').subscribe({
       next: response => {
         if (response) {
           this.data = response;
@@ -37,7 +37,7 @@ export class HeaderComponent {
         console.error('Lỗi xảy ra khi lấy dữ liệu sách', error);
       }
     });
-    this.http.get<bookimg[]>(`https://localhost:7009/api/Bookimgs?`).subscribe(
+    this.http.get<bookimg[]>(`https://qlchs20240725164709.azurewebsites.net/api/Bookimgs?`).subscribe(
       {
         next: response => {
           // Store the image in the bookImage object with the book ID as the key
@@ -49,7 +49,7 @@ export class HeaderComponent {
           console.error('Lỗi xảy ra khi lấy dữ liệu hình ảnh', error);
         }
       });
-    this.http.get<Category[]>(`https://localhost:7009/api/Categories?`).subscribe(
+    this.http.get<Category[]>(`https://qlchs20240725164709.azurewebsites.net/api/Categories?`).subscribe(
       {
         next: response => {
           if (response) {

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class BillsService {
 
-  private apiUrl = 'https://localhost:7009/api/Bills';
+  private apiUrl = 'https://qlchs20240725164709.azurewebsites.net/api/Bills';
 
   constructor(private http: HttpClient) { }
   getbill() {

@@ -15,7 +15,7 @@ authors:Au[]= [];
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get<Au[]>('https://localhost:7009/api/Authors').subscribe(
+    this.http.get<Au[]>('https://qlchs20240725164709.azurewebsites.net/api/Authors').subscribe(
       (response) => {
         // Store the list of authors in the authors array
         this.authors = response;

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthorsService {
-  private baseUrl: string = 'https://localhost:7009/api/';
+  private baseUrl: string = 'https://qlchs20240725164709.azurewebsites.net/api/';
   constructor(private http: HttpClient, private router: Router) {
    }
   Authors() {
