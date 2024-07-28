@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/web-quan-ly-cua-hang-sach",
+            "outputPath": "dist/WebQuanLyCuaHangSach/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -102,6 +102,68 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/WebQuanLyCuaHangSach/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "WebQuanLyCuaHangSach:build:development",
+              "serverTarget": "WebQuanLyCuaHangSach:server:development"
+            },
+            "production": {
+              "browserTarget": "WebQuanLyCuaHangSach:build:production",
+              "serverTarget": "WebQuanLyCuaHangSach:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/",
+              "/category/",
+              "/product/",
+              "/books",
+              "user",
+              ""
+
+
+
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "WebQuanLyCuaHangSach:build:production",
+              "serverTarget": "WebQuanLyCuaHangSach:server:production"
+            },
+            "development": {
+              "browserTarget": "WebQuanLyCuaHangSach:build:development",
+              "serverTarget": "WebQuanLyCuaHangSach:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

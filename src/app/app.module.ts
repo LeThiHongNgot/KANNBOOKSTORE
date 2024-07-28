@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 // Thư viện cpn
 import { StarRatingComponent } from './component/star-rating/star-rating.component';
 import { AuthorCardComponent } from './component/author-card/author-card.component';
@@ -150,8 +150,7 @@ import { ProductslistComponent } from './component/productslist/productslist.com
     FormsModule,
   ],
 
-  providers: [],
+  providers: [provideClientHydration()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
