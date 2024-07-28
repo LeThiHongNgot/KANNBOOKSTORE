@@ -110,7 +110,15 @@ export class ProductComponent implements OnInit {
       }
     });
   }
-  private updateMetaTags(): void {
+  addMetaTags() {
+    if (this.productful) {
+    this.meta.addTag({ property: 'og:title', content: this.productful.title });
+    this.meta.addTag({ property: 'og:image', content: this.productful.image0 });
+    this.meta.addTag({ property: 'og:url', content: this.currentUrl });
+    }
+  }
+
+ updateMetaTags(): void {
     if (this.productful) {
       this.title.setTitle(this.productful.title);
       this.meta.updateTag({ property: 'og:title', content: this.productful.title });
@@ -134,6 +142,7 @@ getproductid()
             this.averageRating=res.averageRating
             this.checkedProductIds.push(res.bookId);
             this.updateMetaTags();
+            this.addMetaTags();
             if( this.idCategory){
             this.sameCategory(1);
             this.onPageChange(this.page);
