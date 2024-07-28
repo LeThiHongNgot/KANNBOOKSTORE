@@ -17,6 +17,8 @@ import { CustomerService } from 'src/services/customer/customer.service';
 import {BookDetailsViewModel} from 'src/interfaces/fullbook';
 import { ProductViewService } from 'src/services/ProductView/product-view.service';
 import { ProductReviewBookid } from 'src/interfaces/ProductView';
+import { TransferState, makeStateKey } from '@angular/platform-browser';
+const STATE_KEY_PRODUCT = makeStateKey('product');
 import { Meta, Title } from '@angular/platform-browser';@Component({ selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
