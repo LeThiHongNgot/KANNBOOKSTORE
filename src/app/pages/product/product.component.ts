@@ -115,9 +115,6 @@ export class ProductComponent implements OnInit {
       this.meta.updateTag({ property: 'og:title', content: this.productful.title });
       this.meta.updateTag({ property: 'og:image', content: this.productful.image0 });
       this.meta.updateTag({ property: 'og:url', content: this.currentUrl });
-      console.log(this.meta.getTag('property="og:title"'));
-      console.log(this.meta.getTag('property="og:image"'));
-      console.log(this.meta.getTag('property="og:url"'));
     }
   }
 getproductid()
