@@ -91,6 +91,7 @@ export class ProductComponent implements OnInit {
     this.selectedImage = imageUrl;
   }
   ngOnInit(): void {
+    // this.updateMetaTags();
     this.currentUrl = this.router.url;
     this.route.paramMap.subscribe(params => {
       const combinedParam = params.get('combinedParam');
@@ -115,6 +116,9 @@ export class ProductComponent implements OnInit {
       this.meta.updateTag({ property: 'og:title', content: this.productful.title });
       this.meta.updateTag({ property: 'og:image', content: this.productful.image0 });
       this.meta.updateTag({ property: 'og:url', content: this.currentUrl });
+      console.log(this.meta.getTag('property="og:title"'));
+      console.log(this.meta.getTag('property="og:image"'));
+      console.log(this.meta.getTag('property="og:url"'));
     }
   }
 getproductid()
@@ -128,7 +132,6 @@ getproductid()
             this.productsPrice[res.bookId]=(1-res.pricePercent)*res.unitPrice;
             this.maxquantity = res.quantity ?? 0;
             this.averageRating=res.averageRating
-            console.log(this.averageRating)
             this.checkedProductIds.push(res.bookId);
             this.updateMetaTags();
             if( this.idCategory){
