@@ -146,11 +146,8 @@
               "/category/",
               "/product/",
               "/books",
-              "user",
+              "/user",
               ""
-
-
-
             ]
           },
           "configurations": {
