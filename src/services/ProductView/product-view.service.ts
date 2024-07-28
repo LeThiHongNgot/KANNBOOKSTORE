@@ -9,7 +9,7 @@ import {ProductReviewDTO} from 'src/interfaces/ProductView';
 })
 export class ProductViewService {
 
-  private apiUrl = 'https://qlchs20240725164709.azurewebsites.net/ProductReviews';
+  private apiUrl = 'https://qlchs20240725164709.azurewebsites.net/Api/ProductReviews';
 
   constructor(private http: HttpClient) {}
 

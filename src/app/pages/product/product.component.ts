@@ -70,7 +70,7 @@ export class ProductComponent implements OnInit {
       config.backdrop = 'static';
       config.keyboard = false;
     }
-    
+
     //modal-rating
    open(content:any)
     {
@@ -100,13 +100,7 @@ export class ProductComponent implements OnInit {
         this.productName = combinedParam.substring(0, lastDashIndex);
         // Sử dụng productId để tải thông tin sản phẩm
         if (this.productId) {
-          this.getproductid();
-        if (this.productful) {
-          this.updateMetaTags();
-        }
-      
-          this.onPageChange(this.page);
-          this.sameCategory(1);
+          this.getproductid()
           this.quantity = {};
           this.checkedProductIds = [];
           this.selectedImage='';
@@ -137,10 +131,15 @@ getproductid()
             this.productsPrice[res.bookId]=(1-res.pricePercent)*res.unitPrice;
             this.maxquantity = res.quantity ?? 0;
             this.averageRating=res.averageRating
+            console.log(this.averageRating)
             this.checkedProductIds.push(res.bookId);
+            this.updateMetaTags();
+            if( this.idCategory){
             this.sameCategory(1);
+            this.onPageChange(this.page);
+            }
+            this.getRatingStatistical()
             this.getProductView();
-
           },
           error:(err)=>
           {
@@ -233,7 +232,7 @@ portratingcommen()
       this.getProductView()
       if(this.productId)
       {
-      
+
       }
       this.getRatingStatistical();
       this.sameCategory(1)
@@ -247,7 +246,8 @@ portratingcommen()
 //-------------------------------thay đôi số page khi chuyển trang
 onPageChange(newPage: number): void {
   this.page = newPage;
-   this.sameCategory(this.page);
+  if(this.page){
+  this.sameCategory(this.page);}
 }
 
 percent1(price: number, per: number): number { return price *(1- per) ;}
