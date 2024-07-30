@@ -147,7 +147,8 @@
               "/product/",
               "/books",
               "/user",
-              ""
+              "/admin",
+              "/books"
             ]
           },
           "configurations": {
