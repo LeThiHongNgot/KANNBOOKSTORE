@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: WebQuanLyCuaHangSach
+    staticPublishPath: dist/WebQuanLyCuaHangSach/browser
+    buildCommand: npm run build
+    routes:
+      - source: /.*
+        destination: /index.html
+        type: rewrite
