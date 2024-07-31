@@ -8,9 +8,8 @@ import { Category } from 'src/interfaces/Category';
 import { Router } from '@angular/router';
 import { BookDetail } from 'src/interfaces/bookdetail';
 import { BooksService } from 'src/services/Books/books.service';
-import { BookDetailsService } from 'src/services/BookDetails/bookdetails.service';
 import { BookDetailsViewModel } from 'src/interfaces/fullbook';
-import { ProductViewService } from 'src/services/ProductView/product-view.service';
+import { AuthorsService } from 'src/services/Authors/authors.service';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -18,7 +17,11 @@ import { ProductViewService } from 'src/services/ProductView/product-view.servic
 })
 export class CategoryComponent implements OnInit {
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private book: BooksService, private bookdetailService: BookDetailsService, private productView: ProductViewService,) { }
+  constructor(private http: HttpClient,
+  private route: ActivatedRoute,
+  private router: Router,
+  private book: BooksService,
+  private authorService:AuthorsService) { }
   pageSize = 8;
   page = 1;
   booksPagination: BookDetailsViewModel[] = [];
@@ -44,7 +47,7 @@ export class CategoryComponent implements OnInit {
     if (categoryId) {
       this.caId = categoryId;
       this.loadBooks(1);
-      this.http.get<Author[]>(`https://qlchs20240725164709.azurewebsites.net/api/Authors`).subscribe(
+      this.authorService.Authors().subscribe(
         {
           next: response => {
             this.author = response;
@@ -134,7 +137,7 @@ export class CategoryComponent implements OnInit {
                 const authorName = book.authorName;
                 this.arrayAuthor.set(authorId, authorName);
               });
-              
+
 
             }
           },

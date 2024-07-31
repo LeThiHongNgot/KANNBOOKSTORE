@@ -127,7 +127,7 @@ export class ProductComponent implements OnInit {
       this.title.setTitle(this.productful.title);
       this.meta.updateTag({ property: 'og:title', content: this.productful.title });
       this.meta.updateTag({ property: 'og:image', content: this.productful.image0 });
-      this.meta.updateTag({ property: 'og:url', content: 'https://member5.smarterasp.net/cp/cp_screen'});
+      this.meta.updateTag({ property: 'og:url', content: this.currentUrl});
       this.meta.updateTag({ property: 'og:description', content: this.productful.description   });
       this.meta.updateTag({ name: 'keywords', content:environment.keywords });
       this.meta.updateTag({ name: 'description', content: `Thông tin chi tiết về sách: ${this.productful.title}, tác giả ${this.productful.authorName}. Đọc nhận xét, đánh giá từ người đọc và mua sách với giá ưu đãi.`

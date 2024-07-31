@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { bookhome } from 'src/interfaces/bookhome';
 import { bookimg } from 'src/interfaces/bookimg';
 import { Router } from '@angular/router';
 import { Author } from 'src/interfaces/Author';
 import { Category } from 'src/interfaces/Category';
-import { SharedataService } from 'src/services/sharedata/sharedata.service';
 import { CustomerService } from 'src/services/customer/customer.service';
 import{ BookDetailsViewModel} from 'src/interfaces/fullbook'
+import { CategoriesService } from 'src/services/Categories/categories.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -17,16 +15,20 @@ import{ BookDetailsViewModel} from 'src/interfaces/fullbook'
 export class HeaderComponent {
   idcustomer: string | null = null;
   product: any = {}
-  constructor(private http: HttpClient, private router: Router, private sharedata: SharedataService, private customer: CustomerService) { }
+  constructor(private http: HttpClient,
+  private router: Router,
+  private customer: CustomerService,
+  private categoryService:CategoriesService) { }
   data:  BookDetailsViewModel[] = [];
   bookImage: bookimg[] = [];
   author: Author | null = null;
   filteredProducts:  BookDetailsViewModel[] = [];
   categories: Category[] = [];
 
+
   ngOnInit() {
     // Make a GET request to fetch book data
-    this.http.get<Category[]>(`http://hongngot-001-site1.ltempurl.com/api/Categories?`).subscribe(
+    this.categoryService.Categories().subscribe(
       {
         next: response => {
           if (response) {
