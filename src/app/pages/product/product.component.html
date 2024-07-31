@@ -5,13 +5,13 @@
 </head>
 <app-header></app-header>
 <div class="product">
-
   <div class="container">
     <!-- Nút chia sẻ Facebook -->
     <div class="share">
-      <div class="sharethis-inline-share-buttons" [attr.data-href]="currentUrl"></div>
-      <!-- <div class="fb-share-button" [attr.data-href]="currentUrl" data-layout="button_count">share</div> -->
+      <div class="sharethis-inline-share-buttons" [attr.data-href]="'https://kannbookstore.onrender.com/product/L%C3%A0m-G%C3%AC-C%C3%B3-Ai-Th%E1%BB%B1c-L%C3%B2ng-Mu%E1%BB%91n-Ch%E1%BA%BFt-B2003'"></div>
+      <div class="fb-share-button" [attr.data-href]="currentUrl" data-layout="button_count">share</div> 
     </div>
+    
     <div class="product-content row" *ngIf="productful">
       <div class="overlay" *ngIf="this.maxquantity <= 0">
         <span>HẾT HÀNG</span>
@@ -102,69 +102,7 @@
         (pageChange)="onPageChange($event)"></app-productslist>
     </div>
   </div>
-  <div class="container">
-    <div class="product-relatedproduct">
-      <div class="product-title-top">
-        <p>ĐÁNH GIÁ SẢN PHẨM</p>
-      </div>
-      <div class="product-productreview-bottom">
-        <div class="rating">
-          <div class="rating-number" *ngIf="averageRating">
-            <span>{{averageRating|number:'1.1-1'}}/5</span><br>
-            <app-star-rating [rating]="averageRating"></app-star-rating>
-          </div>
-          <div class="rating-progress-bars">
-            <div class="rating-progress-bars-star" *ngFor="let a of ratingStatistical">
-              <p>{{a.rating}} sao</p>
-              <ngb-progressbar class="mb-3" type="warning" textType="dark" [value]="(a.count/this.totalVotes)*100"
-                [showValue]="true" [max]="100" [striped]="true" />
-            </div>
-
-          </div>
-          <div class="rating-btn">
-            <p>Chỉ có thành viên mới có thể viết nhận xét. Vui lòng <span>đăng nhập</span> hoặc <span>đăng ký</span>.
-            </p>
-            <ng-template #content let-c="close" let-d="dismiss">
-              <div class="modal-header">
-                <h4 class="modal-title" id="modal-basic-title">Đánh giá sản phẩm</h4>
-                <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
-              </div>
-              <div class="modal-body">
-                <app-rating-decimal [rating]="commemtrating.rating || 0"
-                  (ratingChange)="onRatingChange($event)"></app-rating-decimal>
-                <br>
-                <label for="typeahead-basic">Viết nhận xét của bạn về sản phẩm</label>
-                <textarea type="text" class="form-control" [(ngModel)]="commemtrating.comment"></textarea>
-              </div>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" (click)="portratingcommen();c('Save click')">Gửi nhận
-                  xét</button>
-              </div>
-            </ng-template>
-
-            <button mat-raised-button (click)="open(content)">Viết đánh giá</button>
-          </div>
-        </div>
-        <div class="comment" *ngFor="let productView of productViewinterface">
-          <table>
-            <td>
-              <tr><b>{{ productView.customerName }}</b></tr>
-              <tr>{{ productView.ngayCommemt | date: 'dd/MM/yyyy' }}</tr>
-            </td>
-            <td>
-              <tr>
-                <app-star-rating [rating]="productView.rating"></app-star-rating>
-              </tr>
-              <tr>
-                <p>{{ productView.comment }}</p>
-              </tr>
-            </td>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
+ 
 </div>
 
 <app-footer></app-footer>
