@@ -1,42 +1,42 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { environment } from 'src/app/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class BillsService {
 
-  private apiUrl = 'https://qlchs20240725164709.azurewebsites.net/api/Bills';
+  private apiUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
   getbill() {
-    return this.http.get<any>(`${this.apiUrl}/orderNotSuccess`)
+    return this.http.get<any>(`${this.apiUrl}Bills/orderNotSuccess`)
   }
   getBillStatus(customerId: string, status: string): Observable<any> {
-    const url = `${this.apiUrl}/customer/${customerId}/status/${encodeURIComponent(status)}`;
+    const url = `${this.apiUrl}Bills/customer/${customerId}/status/${encodeURIComponent(status)}`;
     return this.http.get<any>(url);
   }
   getbillSuccess() {
-    return this.http.get<any>(`${this.apiUrl}/orderSuccess`)
+    return this.http.get<any>(`${this.apiUrl}Bills/orderSuccess`)
   }
   postBill(bill: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<any>(this.apiUrl, bill, { headers: headers });
   }
   updateBillStatus(billId: string, status: string) {
-    const url = `${this.apiUrl}/${encodeURIComponent(billId)}/${encodeURIComponent(status)}`;
+    const url = `${this.apiUrl}Bills/${encodeURIComponent(billId)}/${encodeURIComponent(status)}`;
     const body = { status: status };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put(url, body ,{ headers: headers })
   }
   updateBillStatusPayment(billId: string, statuspayment:string) {
-    const url = `${this.apiUrl}/update/${encodeURIComponent(billId)}/${encodeURIComponent(statuspayment)}`;
+    const url = `${this.apiUrl}Bills/update/${encodeURIComponent(billId)}/${encodeURIComponent(statuspayment)}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put(url,{ headers: headers })
   }
   getdetailsbill(billId: string) {
-    const url = `${this.apiUrl}/withorderbill/${encodeURIComponent(billId)}`;
+    const url = `${this.apiUrl}Bilss/withorderbill/${encodeURIComponent(billId)}`;
     return this.http.get(url)
   }
 }

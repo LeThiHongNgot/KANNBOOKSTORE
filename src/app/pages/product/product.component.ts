@@ -17,9 +17,9 @@ import { CustomerService } from 'src/services/customer/customer.service';
 import {BookDetailsViewModel} from 'src/interfaces/fullbook';
 import { ProductViewService } from 'src/services/ProductView/product-view.service';
 import { ProductReviewBookid } from 'src/interfaces/ProductView';
-import { TransferState, makeStateKey } from '@angular/platform-browser';
-const STATE_KEY_PRODUCT = makeStateKey('product');
-import { Meta, Title } from '@angular/platform-browser';@Component({ selector: 'app-product',
+import { Meta, Title } from '@angular/platform-browser';
+import { environment } from 'src/app/environments/environment';
+@Component({ selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
   providers: [ NgbModalConfig, NgbModal,NgbRatingConfig, NgbTypeaheadModule, FormsModule, JsonPipe, NgbRatingModule ]
@@ -71,6 +71,7 @@ export class ProductComponent implements OnInit {
     ) {
       config.backdrop = 'static';
       config.keyboard = false;
+
     }
 
     //modal-rating
@@ -94,7 +95,7 @@ export class ProductComponent implements OnInit {
   }
   ngOnInit(): void {
     // this.updateMetaTags();
-    this.currentUrl = this.router.url;
+    this.currentUrl = location.href;
     this.route.paramMap.subscribe(params => {
       const combinedParam = params.get('combinedParam');
       if (combinedParam) {
@@ -112,20 +113,25 @@ export class ProductComponent implements OnInit {
       }
     });
   }
-  addMetaTags() {
-    if (this.productful) {
-    this.meta.addTag({ property: 'og:title', content: this.productful.title });
-    this.meta.addTag({ property: 'og:image', content: this.productful.image0 });
-    this.meta.addTag({ property: 'og:url', content: this.currentUrl });
-    }
-  }
+  // addMetaTags() {
+  //   if (this.productful) {
+  //   this.meta.addTag({ property: 'og:title', content: this.productful.title });
+  //   this.meta.addTag({ property: 'og:image', content: this.productful.image0 });
+  //   this.meta.addTag({ property: 'og:description', content: this.currentUrl });
+  //   this.meta.addTag({ property: 'og:url', content: this.currentUrl });
+  //   }
+  // }
 
  updateMetaTags(): void {
     if (this.productful) {
       this.title.setTitle(this.productful.title);
       this.meta.updateTag({ property: 'og:title', content: this.productful.title });
       this.meta.updateTag({ property: 'og:image', content: this.productful.image0 });
-      this.meta.updateTag({ property: 'og:url', content: this.currentUrl });
+      this.meta.updateTag({ property: 'og:url', content: 'https://member5.smarterasp.net/cp/cp_screen'});
+      this.meta.updateTag({ property: 'og:description', content: this.productful.description   });
+      this.meta.updateTag({ name: 'keywords', content:environment.keywords });
+      this.meta.updateTag({ name: 'description', content: `Thông tin chi tiết về sách: ${this.productful.title}, tác giả ${this.productful.authorName}. Đọc nhận xét, đánh giá từ người đọc và mua sách với giá ưu đãi.`
+      });
       console.log(this.meta.getTag('property="og:title"'));
       console.log(this.meta.getTag('property="og:image"'));
       console.log(this.meta.getTag('property="og:url"'));
@@ -144,7 +150,6 @@ getproductid()
             this.averageRating=res.averageRating
             this.checkedProductIds.push(res.bookId);
             this.updateMetaTags();
-            this.addMetaTags();
             if( this.idCategory){
             this.sameCategory(1);
             this.onPageChange(this.page);

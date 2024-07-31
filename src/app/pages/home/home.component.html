@@ -38,7 +38,7 @@
     <mat-card class="highlighted-title-card">
       <mat-card-content style="font-size: 18px; color: #FFF;font-weight: bold;">SẢN PHẨM NỔI BẬT</mat-card-content>
     </mat-card>
-    <app-productslist [products]="bookfull" [loadedBooksCount]="loadedBooksCount" [pageSize]="pageSize"
+    <app-productslist [products]="bookfull" [loadedBooksCount]="loadedBooksCount"
         [page]="page" (pageChange)="onPageChange($event)"></app-productslist>
   </div>
   <app-author-card></app-author-card>
@@ -47,7 +47,7 @@
     <mat-card class="highlighted-title-card">
       <mat-card-content style="font-size: 18px; color: #FFF;font-weight: bold;">GỢI Ý CHO BẠN</mat-card-content>
     </mat-card>
-    <app-productslist [products]="booksuggest" [loadedBooksCount]="loadedBooksCount" [pageSize]="pageSize"
+    <app-productslist [products]="booksuggest" [loadedBooksCount]="loadedBooksCount"
         [page]="page" (pageChange)="onPageChange($event)"></app-productslist>
   </div>
 </div>

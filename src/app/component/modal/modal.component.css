@@ -26,13 +26,15 @@
   width: 100%;
 }
 
-.login-left, .register-left {
+.login-left,
+.register-left {
   position: relative;
   width: 50%;
   display: flex;
   flex-direction: column;
 }
-.login-left{
+
+.login-left {
   align-items: center;
 }
 
@@ -88,6 +90,11 @@
   height: 30px;
 }
 
+.form-input input {
+  border: none;
+  outline: none;
+}
+
 .input-register {
   font-size: 15px;
   width: 100%;
@@ -111,7 +118,8 @@
   transition: font-size 0.3s, filter 0.3s;
 }
 
-.register-right, .login-right {
+.register-right,
+.login-right {
   position: relative;
   width: 50%;
   display: flex;
@@ -134,7 +142,8 @@
 }
 
 
-.register-right img, .login-left img {
+.register-right img,
+.login-left img {
   position: absolute;
   object-fit: cover;
   width: 100%;
@@ -143,7 +152,8 @@
   z-index: 0;
 }
 
-.register-right button, .login-left button {
+.register-right button,
+.login-left button {
   position: absolute;
   z-index: 2;
   border: 2px solid #f7f3f3;
@@ -155,7 +165,9 @@
   top: 65%;
 }
 
-.register-right button:hover, .btn-login:hover, .login-left button:hover{
+.register-right button:hover,
+.btn-login:hover,
+.login-left button:hover {
   scale: calc(1.05);
   letter-spacing: 1.5px;
   background-color: #ddd;

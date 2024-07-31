@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Router } from '@angular/router';
 import { BookDetail } from 'src/interfaces/bookdetail';
-
+import { environment } from 'src/app/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookDetailsService {
 
-  private baseUrl: string = 'https://qlchs20240725164709.azurewebsites.net/api/';
+  private baseUrl: string = environment.baseUrl;
   constructor(private http: HttpClient, private router: Router) {
    }
   BookDetail() {

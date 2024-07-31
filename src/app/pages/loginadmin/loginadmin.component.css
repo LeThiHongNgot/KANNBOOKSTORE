@@ -10,10 +10,10 @@
 }
 
 .main {
-  width: 80%; 
+  width: 80%;
   max-width: 500px;
-  height: 95vh; 
-  max-height: 800px; 
+  height: 95vh;
+  max-height: 800px;
   background: #97978d;
   overflow: hidden;
   border-radius: 10px;
@@ -50,7 +50,7 @@ label {
 }
 input {
   width: 70%;
-  height: 10%; 
+  height: 10%;
   background: #e0dede;
   justify-content: center;
   display: flex;
@@ -85,13 +85,13 @@ font-family: 'Jost', sans-serif;
 }
 
 button {
-  width: 50%; 
-  height: 50px; 
+  width: 50%;
+  height: 50px;
   margin: 10px auto;
   justify-content: center;
   display: block;
   color: #97978d;
-  background: #fff; 
+  background: #fff;
   font-size: 1.2em;
   font-weight: bold;
   margin-top: 30px;
@@ -135,12 +135,12 @@ button:hover {
 
 @media (max-width: 768px) {
   .main {
-      width: 70%; 
+      width: 70%;
       height: 75vh;
   }
 
   label {
-      font-size: 2em; 
+      font-size: 2em;
   }
 
   input,
@@ -167,7 +167,7 @@ button:hover {
   }
 
   label {
-      font-size: 1.8em; 
+      font-size: 1.8em;
   }
 
   input,

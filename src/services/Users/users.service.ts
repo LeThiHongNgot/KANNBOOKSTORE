@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/app/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  private baseUrl: string = 'https://qlchs20240725164709.azurewebsites.net/api/';
+  private baseUrl=environment.baseUrl;
 
   constructor(private http: HttpClient, private router: Router) {
   }

@@ -8,9 +8,7 @@ import { Router } from '@angular/router';
 export class ProductslistComponent {
   @Input() products: any[] = [];
   @Input() loadedBooksCount: number = 0;
-  @Input() pageSize: number = 10;
   @Input() page: number = 1;
-
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
   constructor(
     private router: Router
@@ -30,4 +28,9 @@ export class ProductslistComponent {
 
   percent2(per: number) { return '-' + per * 100 + '%'; }
 
+  shouldShowPagination(): boolean {
+    const itemsPerPage = 10;
+    const totalPages = Math.ceil(this.loadedBooksCount / itemsPerPage);
+    return totalPages > 1;
+  }
 }

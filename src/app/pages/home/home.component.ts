@@ -26,7 +26,7 @@ export class HomeComponent {
   Books: bookhome[] = [];
   img: bookimg[] = [];
   author: Author | null = null;
-  pageSize = 10;
+  pageSize = 5;
   page = 1;
   bookfull: BookDetailsViewModel[] = [];
   booksuggest: BookDetailsViewModel[] = [];
@@ -47,7 +47,7 @@ export class HomeComponent {
     });
   }
   getProductsuggest(): void {
-    this.books.getBookHavePreView(1, 5).subscribe({
+    this.books.getBookHavePreView(1, this.pageSize).subscribe({
       next: (res) => {
         this.booksuggest = res.data
       },

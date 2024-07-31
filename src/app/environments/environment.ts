@@ -1,6 +1,8 @@
 
 export const environment = {
   production: false,
+  baseUrl:"https://localhost:7009/api/",
+  keywords: 'sách, mua sách trực tuyến, sách văn học, sách tiểu thuyết, sách mới nhất, giảm giá sách, bookstore, KANN',
   firebaseConfig :
   {
     apiKey: "AIzaSyB8K_ggTJEaAMtANChnFkB1TuexTE4ysnY",

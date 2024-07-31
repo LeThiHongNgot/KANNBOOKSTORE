@@ -26,7 +26,7 @@ export class HeaderComponent {
 
   ngOnInit() {
     // Make a GET request to fetch book data
-    this.http.get<Category[]>(`https://qlchs20240725164709.azurewebsites.net/api/Categories?`).subscribe(
+    this.http.get<Category[]>(`http://hongngot-001-site1.ltempurl.com/api/Categories?`).subscribe(
       {
         next: response => {
           if (response) {
@@ -65,7 +65,7 @@ export class HeaderComponent {
     }
   }
   loadpro(name: string): void {
-    this.http.get< BookDetailsViewModel[]>('https://qlchs20240725164709.azurewebsites.net/api/Books/details/imgaes').subscribe({
+    this.http.get< BookDetailsViewModel[]>('http://hongngot-001-site1.ltempurl.com/api/Books/details/imgaes').subscribe({
       next: response => {
         if (response) {
           this.data = response;

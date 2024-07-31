@@ -4,26 +4,26 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
+import { environment } from 'src/app/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-  private baseUrl: string = 'https://qlchs20240725164709.azurewebsites.net/api/Login/';
+  private baseUrl=environment.baseUrl;
   userInfo = new BehaviorSubject(null);
   jwtHelper = new JwtHelperService();
   constructor(private http: HttpClient, private router: Router,) {
   }
   forgerPass(phone: number, pass: string) {
-    return this.http.put(`${this.baseUrl}updatePassword/${phone}/${pass}`, {});
+    return this.http.put(`${this.baseUrl}Login/updatePassword/${phone}/${pass}`, {});
   }
 
   signUp(userObj: any) {
-    return this.http.post<any>(`${this.baseUrl}signup`, userObj)
+    return this.http.post<any>(`${this.baseUrl}Login/signup`, userObj)
   }
 
   signIn(phone: string, password: string): Observable<any> {
-    const url = `${this.baseUrl}signin/${phone}/${password}`;
+    const url = `${this.baseUrl}Login/signin/${phone}/${password}`;
     return this.http.post<any>(url, {}).pipe(
       map(response => {
         // Save the token to localStorage
@@ -38,10 +38,10 @@ export class CustomerService {
     );
   }
   update(id: string, data: any) {
-    return this.http.put<any>(`${this.baseUrl}update/${id}`, data);
+    return this.http.put<any>(`${this.baseUrl}Login/update/${id}`, data);
   }
   updatepass(phone: string, password: string): Observable<any> {
-    const apiUrl = `${this.baseUrl}VerifyPassword/${phone}/${password}`;
+    const apiUrl = `${this.baseUrl}Login/VerifyPassword/${phone}/${password}`;
     return this.http.get<any>(apiUrl);
   }
   getClaimValue(): string | '' {

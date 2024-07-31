@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Router } from '@angular/router';
-import { Order } from 'src/interfaces/Orders';
+import { environment } from 'src/app/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class OrdersService {
 
-  private baseUrl: string = 'https://qlchs20240725164709.azurewebsites.net/api/';
+  private baseUrl=environment.baseUrl;
   constructor(private http: HttpClient, private router: Router) {
    }
 

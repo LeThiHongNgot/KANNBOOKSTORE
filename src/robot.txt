@@ -12,4 +12,4 @@ Allow: /books
 Allow: /product/
 Allow: /category-product
 
-Sitemap: https://brave-mud-016dc860f.5.azurestaticapps.net/sitemap.xml
+Sitemap: http://localhost:62574/sitemap.xml

@@ -4,12 +4,13 @@ import {ProductView} from 'src/interfaces/ProductView';
 import {ProductReviewBookid} from 'src/interfaces/ProductView';
 import { Observable } from 'rxjs';
 import {ProductReviewDTO} from 'src/interfaces/ProductView';
+import { environment } from 'src/app/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductViewService {
 
-  private apiUrl = 'https://qlchs20240725164709.azurewebsites.net/Api/ProductReviews';
+  private apiUrl =environment.baseUrl;
 
   constructor(private http: HttpClient) {}
 

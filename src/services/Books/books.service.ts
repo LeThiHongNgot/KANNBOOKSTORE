@@ -3,12 +3,13 @@ import { HttpClient ,HttpHeaders} from "@angular/common/http";
 import { Router } from '@angular/router';
 import {BookDetailsViewModel} from 'src/interfaces/fullbook';
 import { Observable } from 'rxjs';
+import { environment } from 'src/app/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class BooksService {
 
-  private baseUrl: string = 'https://qlchs20240725164709.azurewebsites.net/api/';
+  private baseUrl: string = environment.baseUrl;
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -19,8 +20,13 @@ export class BooksService {
   }
   //get theo id 3 bảng book
   getBookDetailsWithImagesid(bookId: string) {
+    const username = '11188393';
+    const password = '60-dayfreetrial';
+    const headers = new HttpHeaders({
+      'Authorization': 'Basic ' + btoa(username + ':' + password),
+      'Content-Type': 'application/json'
+    });
     const url = `${this.baseUrl}Books/details/images/${bookId}`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.get<BookDetailsViewModel>(url,{headers:headers});
   }
   //get gop 3 bảng book lại với nhau

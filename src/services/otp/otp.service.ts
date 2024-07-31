@@ -14,6 +14,12 @@ export class OtpService {
   private apiUrl = 'https://api.zerobounce.net/v2/validate'; // URL API của ZeroBounce
   private apiKey = '0d0981ba02824535a6287fba47adec46';
 
+
+   // Use popup for Google sign-in
+   signInWithGoogle() {
+    return this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  }
+
   sendOTP(phoneNumber: string): Promise<any> {
     return this.afAuth.signInWithPhoneNumber(phoneNumber, new firebase.auth.RecaptchaVerifier('phone'));
   }

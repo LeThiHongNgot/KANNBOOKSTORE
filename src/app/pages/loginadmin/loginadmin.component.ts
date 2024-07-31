@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UsersService } from 'src/services/Users/users.service';
 import { Router } from '@angular/router';
-
+import { OtpService } from 'src/services/otp/otp.service';
 @Component({
   selector: 'app-loginadmin',
   templateUrl: './loginadmin.component.html',
@@ -9,95 +9,126 @@ import { Router } from '@angular/router';
 })
 export class LoginadminComponent {
 
-  constructor(private usersService:UsersService,
-              private router:Router,
-
-  )
-  {
-
-  }
+  constructor(
+    private usersService: UsersService,
+    private router: Router,
+    private otpService: OtpService
+  ) { }
+  showInputPassword: boolean = false;
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
   message: string = '';
-  DataLogin:any={}
-  DataForget:any={}
-  otpSent: boolean = true;
-  otp: string[] = new Array(6).fill('');
+  login_message='';
+  DataLogin: any = {};
+  DataForget: any = {};
+  otpSent: boolean = false;
+  otp: string = '';
   newPassword: string = '';
   confirmPassword: string = '';
   otpVerified: boolean = false;
-  login()
-  {
-    this.usersService.signIn(this.DataLogin.email,this.DataLogin.password).subscribe(
-      { next: (res) => {
-        this.router.navigate(['books']);
-      },
-      error: (err) => {
-        console.log("Đăng nhập không thành công",err)
-      }
-      }
-    )
+
+  toggleInputPasswordVisibility(): void{
+    this.showInputPassword = !this.showInputPassword;
+  }
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 
-  onOtpInput(event: any, nextInputId: string): void {
-    const currentInput = event.target;
-    const value = currentInput.value;
+  toggleConfirmPasswordVisibility(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
 
-    if (value.length === 1) {
-      // Move focus to next input
-      const nextInput = document.querySelector(`#${nextInputId}`) as HTMLInputElement;
-      if (nextInput) {
-        nextInput.focus();
+  login() {
+    this.otpService.validateEmail(this.DataForget.email).subscribe({
+      next: (res) => {
+        this.usersService.signIn(this.DataLogin.email, this.DataLogin.password).subscribe(
+          {
+            next: (res) => {
+              this.router.navigate(['books']);
+            },
+            error: (err) => {
+              console.log("Đăng nhập không thành công", err);
+              this.login_message='Đăng nhập thất bại. Kiểm tra lại tài khoản và mật khẩu';
+            }
+          }
+        );
+      },
+      error: (err) => {
+        console.log("Đăng nhập không thành công", err);
+        this.login_message='Đăng nhập thất bại. Kiểm tra lại tài khoản và mật khẩu';
       }
-    }
+    })
+
   }
 
   sendOtp(): void {
-    this.usersService.sendOtpEmail(this.DataForget.email).subscribe({
-      next: (response) => {
-        this.message = `OTP email sent successfully.`;
-        this.otpSent = true;
+    this.otpService.validateEmail(this.DataForget.email).subscribe({
+      next:() =>{
+        this.usersService.sendOtpEmail(this.DataForget.email).subscribe({
+          next: (response) => {
+            this.message = `Đã gửi mã xác nhận. Vui lòng kiểm tra mail của bạn`;
+            this.otpSent = true;
+          },
+          error: (err) => {
+            console.error('Error sending OTP email:', err);
+            this.message = 'Đã xảy ra lỗi. Vui lòng kiểm tra lại email vừa nhập';
+          }
+        });
       },
       error: (err) => {
-        console.error('Error sending OTP email:', err);
-        this.message = 'Error sending OTP email';
+        this.message = 'Đã xảy ra lỗi. Vui lòng kiểm tra lại email vừa nhập';
       }
     });
   }
 
   verifyOtp(): void {
-    if (this.otp.join('').length === 6) { // Join otp array to make a single string
-      const otpString = this.otp.join('');
-      this.usersService.verifyOtp(this.DataForget.email, otpString).subscribe({
+    if (this.otp.length === 6) {
+      this.usersService.verifyOtp(this.DataForget.email, this.otp).subscribe({
         next: () => {
-          this.message = 'OTP verified successfully';
-          this.otpSent = false; // Hide OTP input fields
-          this.otpVerified = true; // Show password input fields
+          this.otpSent = false;
+          this.otpVerified = true;
         },
         error: (err) => {
           console.error('Error verifying OTP:', err);
-          this.message = 'Invalid OTP';
+          this.message = 'Mã xác nhận không hợp lệ';
+          this.otp='';
         }
       });
     }
   }
-  onOtpChange(): void {
-    if (this.otp.length === 6) {
+
+  onOtpChange(otp: string) {
+    this.otp = otp;
+    if (otp.length === 6) {
       this.verifyOtp();
     }
   }
+
   resetPassword(): void {
     if (this.newPassword === this.confirmPassword) {
-      this.usersService.updatePassword(this.DataForget.email,this.newPassword).subscribe({
+      this.usersService.updatePassword(this.DataForget.email, this.newPassword).subscribe({
         next: () => {
-          this.message = 'Password reset successfully';
+          this.message = 'Thay đổi mật khẩu thành công';
+          this.otpVerified = false;
+          const chkBox = document.getElementById('chk') as HTMLInputElement;
+          if (chkBox) {
+            chkBox.checked = false;
+          }
         },
         error: (err) => {
-          console.error('Error verifying OTP:', err);
-
+          console.error('Mã xác nhận xảy ra lỗi', err);
         }
       });
-
     } else {
-      this.message = 'Passwords do not match';
+      this.message = 'Mật khẩu không khớp';
     }
+  }
+
+  resetForm(): void {
+    this.otpSent = false;
+    this.otpVerified = false;
+    this.DataForget = {};
+    this.newPassword = '';
+    this.confirmPassword = '';
   }
 }
