@@ -1,6 +1,6 @@
 [build]
   # Lệnh để xây dựng ứng dụng của bạn
-  command = "npm run serve:ssr"
+  command = "npm run build"
 
   # Thư mục chứa các tệp tĩnh để triển khai
   publish = "dist/WebQuanLyCuaHangSach/browser"
