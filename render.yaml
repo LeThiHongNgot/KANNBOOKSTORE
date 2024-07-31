@@ -2,7 +2,7 @@ services:
   - type: web
     name: WebQuanLyCuaHangSach
     staticPublishPath: dist/WebQuanLyCuaHangSach/browser
-    buildCommand: npm run build
+    buildCommand: npm run build:ssr
     routes:
       - source: /.*
         destination: /index.html
