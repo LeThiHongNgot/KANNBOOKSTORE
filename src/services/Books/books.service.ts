@@ -20,14 +20,9 @@ export class BooksService {
   }
   //get theo id 3 bảng book
   getBookDetailsWithImagesid(bookId: string) {
-    const username = '11188393';
-    const password = '60-dayfreetrial';
-    const headers = new HttpHeaders({
-      'Authorization': 'Basic ' + btoa(username + ':' + password),
-      'Content-Type': 'application/json'
-    });
+
     const url = `${this.baseUrl}Books/details/images/${bookId}`;
-    return this.http.get<BookDetailsViewModel>(url,{headers:headers});
+    return this.http.get<BookDetailsViewModel>(url);
   }
   //get gop 3 bảng book lại với nhau
   getBookDetailImages() {

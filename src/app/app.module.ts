@@ -72,8 +72,6 @@ import { AddSuplierComponent } from './componentAdmin/add-suplier/add-suplier.co
 import { MatDialogModule } from '@angular/material/dialog';
 import { LoginadminComponent } from './pages/loginadmin/loginadmin.component';
 import { ProductslistComponent } from './component/productslist/productslist.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { NgOtpInputModule } from 'ng-otp-input';
 
 @NgModule({
@@ -153,7 +151,7 @@ import { NgOtpInputModule } from 'ng-otp-input';
     NgOtpInputModule
   ],
 
-  providers: [provideClientHydration(), { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  providers: [provideClientHydration()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

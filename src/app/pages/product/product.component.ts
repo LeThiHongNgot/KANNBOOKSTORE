@@ -19,6 +19,7 @@ import { ProductViewService } from 'src/services/ProductView/product-view.servic
 import { ProductReviewBookid } from 'src/interfaces/ProductView';
 import { Meta, Title } from '@angular/platform-browser';
 import { environment } from 'src/app/environments/environment';
+import { Location } from '@angular/common';
 @Component({ selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
@@ -65,6 +66,7 @@ export class ProductComponent implements OnInit {
     private productView:ProductViewService,
     private meta: Meta,
     private title: Title,
+    private location: Location,
     //rating-comment
     config: NgbModalConfig,
 		private modalService: NgbModal,
@@ -95,7 +97,7 @@ export class ProductComponent implements OnInit {
   }
   ngOnInit(): void {
     // this.updateMetaTags();
-    this.currentUrl = location.href;
+    this.currentUrl = window.location.href;
     this.route.paramMap.subscribe(params => {
       const combinedParam = params.get('combinedParam');
       if (combinedParam) {
