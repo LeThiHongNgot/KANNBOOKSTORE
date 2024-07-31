@@ -8,10 +8,10 @@
   <div class="container">
     <!-- Nút chia sẻ Facebook -->
     <div class="share">
-      <div class="sharethis-inline-share-buttons" [attr.data-href]="'https://kannbookstore.onrender.com/product/L%C3%A0m-G%C3%AC-C%C3%B3-Ai-Th%E1%BB%B1c-L%C3%B2ng-Mu%E1%BB%91n-Ch%E1%BA%BFt-B2003'"></div>
-      <div class="fb-share-button" [attr.data-href]="'https://kannbookstore.onrender.com/product/L%C3%A0m-G%C3%AC-C%C3%B3-Ai-Th%E1%BB%B1c-L%C3%B2ng-Mu%E1%BB%91n-Ch%E1%BA%BFt-B2003'" data-layout="button_count">share</div> 
+      <div class="sharethis-inline-share-buttons" [attr.data-href]="currentUrl" ></div>
+      <div class="fb-share-button" [attr.data-href]="currentUrl" data-layout="button_count">share</div>
     </div>
-    
+
     <div class="product-content row" *ngIf="productful">
       <div class="overlay" *ngIf="this.maxquantity <= 0">
         <span>HẾT HÀNG</span>
@@ -102,7 +102,7 @@
         (pageChange)="onPageChange($event)"></app-productslist>
     </div>
   </div>
- 
+
 </div>
 
 <app-footer></app-footer>
