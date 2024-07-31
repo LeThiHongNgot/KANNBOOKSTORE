@@ -1,4 +1,4 @@
-<div class="product-relatedproduct-bottom ">
+<div class="product-relatedproduct-bottom" *ngIf="products">
   <div class="cartegory-right-bottom-item" *ngFor="let product of products"
     (click)="navigateToProduct(product.bookId, product.title)">
     <div class="productIMG">

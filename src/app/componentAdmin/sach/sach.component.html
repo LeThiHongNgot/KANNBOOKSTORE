@@ -35,7 +35,7 @@
                             <th>Thao tác</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody *ngIf="productful">
                         <tr *ngFor="let book of productful ">
                             <td>
                                 <img class="bookimage" [src]="book.image0" alt="Hình ảnh sách">

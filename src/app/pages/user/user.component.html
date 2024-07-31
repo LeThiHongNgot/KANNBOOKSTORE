@@ -154,7 +154,7 @@
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
           <li [ngbNavItem]="1">
             <button ngbNavLink class="highlighted-title-order" (click)="StatusBill('Chờ Xác Nhận')">Chờ Xác Nhận</button>
-            <ng-template ngbNavContent style="background-color:#E9EAEE;">
+            <ng-template ngbNavContent *ngIf="bills" style="background-color:#E9EAEE;">
               <div class="content-order" *ngFor="let bill of bills">
                 <mat-icon *ngIf="bill.status === 'Chờ Xác Nhận'">autorenew</mat-icon>
                 <mat-icon *ngIf="bill.status === 'Đã Xác Nhận'">check_circle</mat-icon>
@@ -212,7 +212,7 @@
           </li>
           <li [ngbNavItem]="3">
             <button ngbNavLink class="highlighted-title-order" (click)="StatusBill('Đã giao')">Đơn hàng đã hoàn thành</button>
-            <ng-template ngbNavContent style="background-color:#E9EAEE;">
+            <ng-template ngbNavContent  *ngIf="bills" style="background-color:#E9EAEE;">
               <div class="content-order" *ngFor="let bill of bills">
                 <mat-icon *ngIf="bill.status === 'Chờ Xác Nhận'">autorenew</mat-icon>
                 <mat-icon *ngIf="bill.status === 'Đã Xác Nhận'">check_circle</mat-icon>
@@ -241,7 +241,7 @@
           </li>
           <li [ngbNavItem]="4">
             <button ngbNavLink  class="highlighted-title-order">ĐƠN ĐÃ HỦY</button>
-            <ng-template ngbNavContent >
+            <ng-template  *ngIf="bills" ngbNavContent >
               <div class="content-order" *ngFor="let item of shopingCart">
                 <mat-icon *ngIf="item.status==1">check_circle</mat-icon>
                 <mat-icon  *ngIf="item.status==0">autorenew</mat-icon>
