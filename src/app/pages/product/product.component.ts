@@ -97,7 +97,7 @@ export class ProductComponent implements OnInit {
   }
   ngOnInit(): void {
     // this.updateMetaTags();
-    this.currentUrl = window.location.href;
+    this.currentUrl = this.router.url;
     this.route.paramMap.subscribe(params => {
       const combinedParam = params.get('combinedParam');
       if (combinedParam) {
