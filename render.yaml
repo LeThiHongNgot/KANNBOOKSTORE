@@ -1,9 +1,6 @@
 services:
   - type: web
     name: WebQuanLyCuaHangSach
-    staticPublishPath: dist/WebQuanLyCuaHangSach/browser
+    runtime: node
     buildCommand: npm run build:ssr
-    routes:
-      - source: /.*
-        destination: /index.html
-        type: rewrite
+    startCommand: npm run serve:ssr
