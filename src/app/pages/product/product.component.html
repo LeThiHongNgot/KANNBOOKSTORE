@@ -9,6 +9,7 @@
   <div class="container">
     <!-- Nút chia sẻ Facebook -->
     <div class="share">
+      <div class="sharethis-inline-follow-buttons" [attr.data-href]="currentUrl" ></div>
       <div class="fb-share-button" [attr.data-href]="currentUrl" data-layout="button_count">share</div>
     </div>
     <div class="product-content row" *ngIf="productful">
