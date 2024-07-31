@@ -1,8 +1,0 @@
-{
-  "/api": {
-    "target": "http://hongngot-001-site1.ltempurl.com/api",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug"
-  }
-}
