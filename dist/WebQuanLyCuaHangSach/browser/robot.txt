@@ -9,7 +9,8 @@ Allow: /user
 Allow: /login
 Allow: /category
 Allow: /books
-Allow: /product/
-Allow: /category-product
+Allow: /product
+Allow: /productlist
+
 
 Sitemap: http://localhost:62574/sitemap.xml
