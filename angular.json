@@ -143,8 +143,8 @@
           "options": {
             "routes": [
               "/",
-              "/category/",
-              "/product/",
+              "/category",
+              "/product",
               "/books",
               "/user",
               "/admin",

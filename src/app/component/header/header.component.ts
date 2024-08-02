@@ -7,6 +7,7 @@ import { Category } from 'src/interfaces/Category';
 import { CustomerService } from 'src/services/customer/customer.service';
 import{ BookDetailsViewModel} from 'src/interfaces/fullbook'
 import { CategoriesService } from 'src/services/Categories/categories.service';
+import { BooksService } from 'src/services/Books/books.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -18,7 +19,8 @@ export class HeaderComponent {
   constructor(private http: HttpClient,
   private router: Router,
   private customer: CustomerService,
-  private categoryService:CategoriesService) { }
+  private categoryService:CategoriesService,
+  private serviceBook:BooksService) { }
   data:  BookDetailsViewModel[] = [];
   bookImage: bookimg[] = [];
   author: Author | null = null;
@@ -67,7 +69,7 @@ export class HeaderComponent {
     }
   }
   loadpro(name: string): void {
-    this.http.get< BookDetailsViewModel[]>('http://hongngot-001-site1.ltempurl.com/api/Books/details/imgaes').subscribe({
+    this.serviceBook. getBookDetailImages().subscribe({
       next: response => {
         if (response) {
           this.data = response;
