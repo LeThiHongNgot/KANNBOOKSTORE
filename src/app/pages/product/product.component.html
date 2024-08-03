@@ -1,5 +1,9 @@
 <app-header></app-header>
 <div class="product">
+  <div class="share">
+    <div class="fb-share-button" [attr.data-href]="currentUrl" data-layout="button_count">share</div>
+   </div>
+
   <div class="container" *ngIf="productful">
     <div class="product-content row">
       <div class="overlay" *ngIf="this.maxquantity <= 0">
@@ -87,7 +91,7 @@
       <div class="product-title-top">
         <p>SẢN PHẨM LIÊN QUAN </p>
       </div>
-      <app-productslist [products]="productSameCategoryID" [loadedBooksCount]="loadedBooksCount" 
+      <app-productslist [products]="productSameCategoryID" [loadedBooksCount]="loadedBooksCount"
         [page]="page" (pageChange)="onPageChange($event)"></app-productslist>
     </div>
   </div>
