@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { CartsService } from 'src/services/Carts/carts.service';
 import { CustomerService } from 'src/services/customer/customer.service';
-import {BookDetailsViewModel} from 'src/interfaces/fullbook';
+import { BookDetailsViewModel } from 'src/interfaces/fullbook';
 import { ProductViewService } from 'src/services/ProductView/product-view.service';
 import { ProductReviewBookid } from 'src/interfaces/ProductView';
 import { Meta, Title } from '@angular/platform-browser';
@@ -22,6 +22,7 @@ import { environment } from 'src/app/environments/environment';
 import { Location } from '@angular/common';
 import { forkJoin, Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { urlencoded } from 'express';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -31,7 +32,8 @@ import { catchError } from 'rxjs/operators';
 export class ProductComponent implements OnInit {
   pageSize = 10;
   page = 1;
-  currentUrl: string='';
+  currentUrl: string = '';
+  sharedUrl = '';
   product: | null = null;
   productful: BookDetailsViewModel | null = null;
   productSameCategoryID: any[] = [];
@@ -79,7 +81,8 @@ export class ProductComponent implements OnInit {
     this.selectedImage = imageUrl;
   }
   ngOnInit(): void {
-    this.currentUrl = window.location.href;
+    this.currentUrl = 'http://kannbookstore.onrender.com/product/L%C3%A0m-G%C3%AC-C%C3%B3-Ai-Th%E1%BB%B1c-L%C3%B2ng-Mu%E1%BB%91n-Ch%E1%BA%BFt-B2003';
+    this.sharedUrl = `https://www.facebook.com/sharer/sharer.php?u=${this.currentUrl}&amp;src=sdkpreparse`;
     this.route.paramMap.subscribe(params => {
       const combinedParam = params.get('combinedParam');
       if (combinedParam) {
@@ -105,13 +108,19 @@ export class ProductComponent implements OnInit {
   updateMetaTags(): void {
     if (this.productful) {
       this.title.setTitle(this.productful.title);
-      this.meta.updateTag({ property: 'og:title', content: this.productful.title });
-      this.meta.updateTag({ property: 'og:image', content: this.productful.image0 });
-      this.meta.updateTag({ property: 'og:url', content: this.currentUrl});
-      this.meta.updateTag({ property: 'og:description', content: this.productful.description   });
-      this.meta.updateTag({ name: 'keywords', content:environment.keywords });
-      this.meta.updateTag({ name: 'description', content: `Thông tin chi tiết về sách: ${this.productful.title}, tác giả ${this.productful.authorName}. Đọc nhận xét, đánh giá từ người đọc và mua sách với giá ưu đãi.`
-      });
+      const metaTags = [
+        { property: 'og:url', content: this.currentUrl },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: this.productful.title },
+        { property: 'og:description', content: this.productful.description },
+        { property: 'og:image', content: this.productful.image0 },
+        // { name: 'keywords', content: environment.keywords },
+        // {
+        //   name: 'description',
+        //   content: `Thông tin chi tiết về sách: ${this.productful.title}, tác giả ${this.productful.authorName}. Đọc nhận xét, đánh giá từ người đọc và mua sách với giá ưu đãi`
+        // }
+      ];
+      metaTags.forEach(tag => this.meta.updateTag(tag));
       console.log(this.meta.getTag('property="og:title"'));
       console.log(this.meta.getTag('property="og:image"'));
       console.log(this.meta.getTag('property="og:url"'));
