@@ -18,7 +18,6 @@ import { OrderNotCompleteComponent } from './componentAdmin/order-not-complete/o
 import { OrderDetailComponent } from './componentAdmin/order-detail/order-detail.component';
 import { CommentComponent } from './componentAdmin/comment/comment.component';
 import { ProductComponent } from './pages/product/product.component';
-import { LoginadminComponent } from './pages/loginadmin/loginadmin.component';
 import { authGuard } from './guards/auth.guard';
 import { adminAuthGuard } from './guards/admin-auth.guard';
 import { staffAuthGuard } from './guards/admin-auth.guard';
@@ -41,7 +40,7 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserComponent,
-    canActivate: [authGuard]
+
   },
   {
     path: 'login',
@@ -128,7 +127,7 @@ const routes: Routes = [
     component: CommentComponent,
     canActivate: [staffAuthGuard]
   },
-  
+
 ]
 
 @NgModule({

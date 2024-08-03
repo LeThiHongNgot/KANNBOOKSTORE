@@ -18,7 +18,6 @@
   align-items: flex-start;
   height: auto;
   margin-bottom: 20px;
-
   background-color: #E9EAEE;
 }
 
@@ -70,7 +69,8 @@ mat-list {
 
 .edit-button-1 p {
   font-size: 12px;
-  margin: 0; /* Xóa margin để tránh khoảng cách thừa */
+  margin: 0;
+  /* Xóa margin để tránh khoảng cách thừa */
 }
 
 .user-name {
@@ -81,7 +81,8 @@ mat-list {
 
 .edit-button {
   display: flex;
-  align-items: center; /* căn chỉnh icon và chữ ở giữa theo chiều dọc */
+  align-items: center;
+  /* căn chỉnh icon và chữ ở giữa theo chiều dọc */
 }
 
 .edit-button mat-icon {
@@ -167,28 +168,20 @@ mat-list {
   margin-bottom: 20px;
 }
 
-.cdk-overlay-connected-position-bounding-box {
-  top: 35px !important;
-}
-
-.cdk-overlay-pane {
-  top: 35px !important;
-}
-
 .mat-form-field {
   margin-bottom: 20px;
 }
 
 .save-button {
   float: right;
-  margin-right: 50px;
   width: 100px;
   color: white;
   background-color: #97978D;
   z-index: 0;
 }
 
-.info-user, .menu-user {
+.info-user,
+.menu-user {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -225,48 +218,40 @@ mat-list {
   margin: auto;
   width: 90%;
   padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   background-color: white;
+  font-weight: 400;
 }
 
-.content-order-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.content-order-top,
+.content-order-bottom {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
 }
 
-.content-order-top-left {
-  flex-basis: 30%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 15px;
-  margin-bottom: 15px;
+.content-order-top tr>th,
+tr>td {
+  width: 33%;
+  padding: 5px 30px 0;
+  text-align: center;
 }
 
-.content-order-top-left img {
-  width: 30%;
+.content-order-top tr>th:last-child,
+tr>td:last-child {
+  text-align: right;
+}
+.content-order-top tr>th:first-child,
+tr>td:first-child {
+  text-align: left;
+}
+
+.content-order-top img {
+  width: 40%;
   height: auto;
   object-fit: cover;
-}
-
-.content-order-top-right {
-  flex-basis: 75%;
-  display: flex;
-  flex-direction: column;
-  margin-right: 3%;
-}
-
-.product-name {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 2%;
-}
-
-.product-details {
-  display: flex;
-  justify-content: space-between;
+  padding: 10px 0;
 }
 
 hr {
@@ -275,20 +260,19 @@ hr {
   margin: 20px 0;
 }
 
-.content-order-bottom {
-  display: flex;
-  justify-content: space-between;
-  font-size: 15px;
+
+.total-amount {
+  font-size: 18px;
   font-weight: bold;
-  margin: 0 3%;
+  color: coral;
 }
 
-.total-price {
-  margin-left: 10px;
+.status-payment {
+  font-size: 13px;
+  color: #97978D;
 }
 
 .content-order:not(:last-child) {
   margin-top: 30px;
   margin-bottom: 20px;
 }
-
