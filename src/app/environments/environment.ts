@@ -2,7 +2,7 @@
 export const environment = {
   production: false,
   // baseUrl:"https://kannbookstore.azurewebsites.net/api/",
-  baseUrl:"http://quanlycuahangsach.somee.com/api/",
+  baseUrl:"https://quanlycuahangsach.somee.com/api/",
   keywords: 'sách, mua sách trực tuyến, sách văn học, sách tiểu thuyết, sách mới nhất, giảm giá sách, bookstore, KANN',
   firebaseConfig :
   {

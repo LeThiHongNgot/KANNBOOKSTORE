@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   // baseUrl:"https://kannbookstore.azurewebsites.net/api/",
-  baseUrl:"http://quanlycuahangsach.somee.com/api/",
+  baseUrl:"https://quanlycuahangsach.somee.com/api/",
   firebaseConfig :
   {
     apiKey: "AIzaSyB8K_ggTJEaAMtANChnFkB1TuexTE4ysnY",
