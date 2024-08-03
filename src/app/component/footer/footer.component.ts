@@ -1,5 +1,6 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { DOCUMENT} from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-footer',
@@ -9,12 +10,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 export class FooterComponent implements OnInit {
   isMapModalVisible = false;
 
-  /**
-   *
-   */
-  constructor(@Inject(DOCUMENT) private readonly document: Document) {
+  constructor(
+    @Inject(DOCUMENT) private readonly document: Document,
+    @Inject(PLATFORM_ID) private readonly platformId: object
+  ) {}
 
-  }
   openMapModal() {
     this.isMapModalVisible = true;
   }
@@ -22,22 +22,23 @@ export class FooterComponent implements OnInit {
   closeMapModal() {
     this.isMapModalVisible = false;
   }
+
   ngOnInit(): void {
-    const script = this.document.createElement('script');
-    script.src = '//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js';
-    script.type = 'text/javascript';
-    script.async = true;
-    script.onload = () => {
-      (function () {
-        // Khai báo kiểu cho fnames và ftypes
-        (window as any).fnames = new Array();
-        (window as any).ftypes = new Array();
-        (window as any).fnames[0] = 'EMAIL';
-        (window as any).ftypes[0] = 'email';
+    if (isPlatformBrowser(this.platformId)) {
+      const script = this.document.createElement('script');
+      script.src = '//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js';
+      script.type = 'text/javascript';
+      script.async = true;
+      script.onload = () => {
+        (function () {
+          (window as any).fnames = new Array();
+          (window as any).ftypes = new Array();
+          (window as any).fnames[0] = 'EMAIL';
+          (window as any).ftypes[0] = 'email';
+        })();
+      };
 
-      });
-    };
-
-    document.body.appendChild(script);
+      this.document.body.appendChild(script);
+    }
   }
 }

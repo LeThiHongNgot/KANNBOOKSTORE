@@ -1,3 +1,8 @@
+<meta property="og:url" content="" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="" />
+  <meta property="og:description" content="" />
+  <meta property="og:image" content="" />
 <app-header></app-header>
 <div class="product">
   <div class="fb-share-button" [attr.data-href]="currentUrl" data-layout="" data-size="">
@@ -106,7 +111,7 @@
             <span>{{averageRating|number:'1.1-1'}}/5</span><br>
             <app-star-rating [rating]="averageRating"></app-star-rating>
           </div>
-          <div class="rating-progress-bars">
+          <div class="rating-progress-bars" >
             <div class="rating-progress-bars-star" *ngFor="let a of ratingStatistical">
               <p>{{a.rating}} sao</p>
               <ngb-progressbar class="mb-3" type="warning" textType="dark" [value]="(a.count/this.totalVotes)*100"

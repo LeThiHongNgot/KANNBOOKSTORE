@@ -15,7 +15,7 @@ export class BooksService {
   }
 //get 3 bảng book theo thể loại
   getBookdetailsByCategory(categoryId: string, page: number | null = null, pageSize: number | null = null) {
-    const url = `${this.baseUrl}Books/details/books?page=${page}&pageSize=${pageSize}&categoryId=${categoryId}`;
+    const url = `${this.baseUrl}Books/details/books?categoryId=${categoryId}&page=${page}&pageSize=${pageSize}`;
     return this.http.get<any>(url);
   }
   //get theo id 3 bảng book
@@ -50,7 +50,7 @@ export class BooksService {
   // Thêm mới sách
 
   postBook(bookData: any): Observable<any> {
-    return this.http.post<any>(`https://localhost:7009/api/Books`, bookData);
+    return this.http.post<any>(`${this.baseUrl}Books`, bookData);
   }
 // sửa sách
 updateBook(formData: FormData): Observable<any> {

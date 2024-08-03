@@ -73,6 +73,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { LoginadminComponent } from './pages/loginadmin/loginadmin.component';
 import { ProductslistComponent } from './component/productslist/productslist.component';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -148,7 +149,8 @@ import { NgOtpInputModule } from 'ng-otp-input';
     CloudinaryModule,
     MatDialogModule,
     FormsModule,
-    NgOtpInputModule
+    NgOtpInputModule,
+    MatSnackBarModule
   ],
 
   providers: [provideClientHydration()],

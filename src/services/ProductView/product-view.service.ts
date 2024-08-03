@@ -16,7 +16,7 @@ export class ProductViewService {
 
 
   getProductReviews(page:number|null,pageSize:number|null): Observable<ProductReviewDTO[]> {
-    const url = `${this.apiUrl}?page=${page}&pageSize=${pageSize}`
+    const url = `${this.apiUrl}ProductReviews?page=${page}&pageSize=${pageSize}`
     return this.http.get<ProductReviewDTO[]>(url);
   }
   getAllProductReviews(): Observable<ProductReviewDTO[]> {
@@ -24,18 +24,18 @@ export class ProductViewService {
     return this.http.get<ProductReviewDTO[]>(url);
   }
   getProductReviewByBookId(id: string): Observable<ProductReviewBookid[]> {
-    const url = `${this.apiUrl}/books/${id}`;
+    const url = `${this.apiUrl}ProductReviews/books/${id}`;
 
     return this.http.get<ProductReviewBookid[]>(url);
   }
 
   getProductReviewRatingBookId(id: string) {
-    const url = `${this.apiUrl}/books/${id}/ratings`;
+    const url = `${this.apiUrl}ProductReviews/books/${id}/ratings`;
     return this.http.get<any>(url);
   }
 
   getProductReviewaAveragBookId(id: string) {
-    const url = `${this.apiUrl}/books/averag/${id}`;
+    const url = `${this.apiUrl}ProductReviews/books/averag/${id}`;
     return this.http.get<any>(url);
   }
 
@@ -45,12 +45,12 @@ export class ProductViewService {
 
   // PUT (update) an existing product review
   updateProductReview(id: string, productReview: ProductView): Observable<ProductView> {
-    const url = `${this.apiUrl}/${id}`;
+    const url = `${this.apiUrl}ProductReviews${id}`;
     return this.http.put<ProductView>(url, productReview);
   }
   // DELETE a product review by ID
   deleteProductReview(id: string): Observable<void> {
-    const url = `${this.apiUrl}/${id}`;
+    const url = `${this.apiUrl}ProductReviews${id}`;
     return this.http.delete<void>(url);
   }
 }
