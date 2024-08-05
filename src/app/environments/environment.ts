@@ -1,8 +1,8 @@
 
 export const environment = {
   production: false,
-  // baseUrl:"https://kannbookstore.azurewebsites.net/api/",
-  baseUrl:"https://quanlycuahangsach.somee.com/api/",
+  baseUrl:"https://localhost:7009/api/",
+  // baseUrl:"https://quanlycuahangsach.somee.com/api/",
   keywords: 'sách, mua sách trực tuyến, sách văn học, sách tiểu thuyết, sách mới nhất, giảm giá sách, bookstore, KANN',
   firebaseConfig :
   {
@@ -12,6 +12,6 @@ export const environment = {
     storageBucket: "phone-auth-6da2a.appspot.com",
     messagingSenderId: "68070531758",
     appId: "1:68070531758:web:d81cb5be978ad787adc33f"
-  }
+  },
 };
 

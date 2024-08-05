@@ -32,8 +32,36 @@ body {
     margin: auto;
 }
 .product-content {
-  position: relative; /* Quan trọng để lớp phủ nằm trên */
+  width: 100%;
+  background-color: #E9EAEE;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;/* Quan trọng để lớp phủ nằm trên */
 }
+.share
+{
+  position: relative;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #E9EAEE;
+  text-align: right;
+}
+.fb-share-button {
+  font-size: 30px; /* Tăng kích thước font chữ bên trong */
+  width: 100px; /* Điều chỉnh chiều rộng nếu cần */
+  height: 30px; /* Điều chỉnh chiều cao nếu cần */
+  line-height: 40px; /* Đặt chiều cao dòng để căn chỉnh văn bản giữa */
+  display: inline-flex; /* Sử dụng flexbox để căn giữa nội dung */
+  align-items: center; /* Căn giữa theo trục dọc */
+  justify-content: center; /* Căn giữa theo trục ngang */
+  background-color: #7e8eb1; /* Màu nền Facebook xanh lam */
+  color: white; /* Màu chữ trắng */
+  border-radius: 5px; /* Bo góc nút */
+  padding: 10px; /* Khoảng cách bên trong */
+  cursor: pointer; /* Thay đổi con trỏ chuột khi hover */
+}
+
 
 .overlay {
   position: absolute;

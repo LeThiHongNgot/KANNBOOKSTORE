@@ -14,8 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CartsService } from 'src/services/Carts/carts.service';
 import { ProductViewService } from 'src/services/ProductView/product-view.service';
 import { ProductReviewBookid } from 'src/interfaces/ProductView';
-import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user',
@@ -253,14 +252,14 @@ export class UserComponent {
   //------------Đăng xuẩt------------------------
   checkconfirm = false;
   checkkind = '';
-  isNameConfirm = '';
+  isNameConfirm = 'Thông báo xác nhận';
   isMessage = '';
   openConfirmDialog() {
     const dialogRef = this.dialog.open(this.confirmDialog, {
       width: '300px',
     });
-    if (this.checkkind != '') {
-      this.isNameConfirm = 'Xác nhận đăng xuất'
+    console.log(this.checkkind)
+    if (this.checkkind == '') {
       this.isMessage = 'Bạn có chắc chắn muốn đăng xuất không?'
     }
     dialogRef.afterClosed().subscribe(result => {
@@ -278,7 +277,6 @@ export class UserComponent {
       this.billService.updateBillStatus(this.checkkind, 'Đã hủy').subscribe({
         next: (res: any) => {
           this.StatusBill('Chờ Xác Nhận');
-          this.checkkind = ''
           this.snackBar.open('Đơn hàng đã được hủy thành công!', 'Đóng', {
             duration: 3000,
           });
@@ -298,17 +296,17 @@ export class UserComponent {
   }
   cancelOrder(billId: string) {
     this.checkkind = billId
-    this.isNameConfirm = 'Xác nhận hủy đơn'
     this.isMessage = 'Bạn có chắc chắn muốn hủy đơn không?'
     this.openConfirmDialog()
 
   }
   onCancel(): void {
     this.dialog.closeAll();
+    this.checkkind = '';
   }
   logout() {
     localStorage.removeItem('access_token');
-
+    this.isMessage = 'Bạn có chắc chắn muốn đăng xuất không?'
     this.snackBar.open(' Đăng xuất thành công ', 'Đóng', {
       duration: 3000,
     });
@@ -319,29 +317,29 @@ export class UserComponent {
     this.idcustomer = this.customer.getClaimValue();
     this.modalService.open(content);
   }
-  bookComment:any;
+  bookComment: any;
 
-getCustomerComment(bookId: any): boolean {
-  let result = false;
+  getCustomerComment(bookId: any): boolean {
+    let result = false;
 
-  this.cartsService.CartsIdCustomer(this.idcustomer).subscribe({
-    next: (res) => {
-      if (res.bookId) { // Kiểm tra xem bookId có tồn tại trong res không
-        if (bookId === res.bookId) {
-          result = true; // Trả về true nếu bookId tồn tại và khớp
+    this.cartsService.CartsIdCustomer(this.idcustomer).subscribe({
+      next: (res) => {
+        if (res.bookId) { // Kiểm tra xem bookId có tồn tại trong res không
+          if (bookId === res.bookId) {
+            result = true; // Trả về true nếu bookId tồn tại và khớp
+          }
+        } else {
+          console.warn('Không tìm thấy bookId trong phản hồi');
         }
-      } else {
-        console.warn('Không tìm thấy bookId trong phản hồi');
+      },
+      error: (err: any) => {
+        console.error('Lỗi khi lấy đánh giá:', err);
+        // Xử lý lỗi nếu cần
       }
-    },
-    error: (err: any) => {
-      console.error('Lỗi khi lấy đánh giá:', err);
-      // Xử lý lỗi nếu cần
-    }
-  });
+    });
 
-  return result; // Trả về kết quả (nhưng lưu ý rằng việc này sẽ xảy ra trước khi `subscribe` hoàn tất)
-}
+    return result; // Trả về kết quả (nhưng lưu ý rằng việc này sẽ xảy ra trước khi `subscribe` hoàn tất)
+  }
 
 
   portratingcomment(bill: any) {
@@ -477,6 +475,7 @@ getCustomerComment(bookId: any): boolean {
   bills: any = [];
 
   StatusBill(status: string) {
+    this.checkkind = ''
     this.bills = []
     this.billService.getBillStatus(this.idcustomer, status).subscribe({
       next: (res: any[]) => {
@@ -501,11 +500,9 @@ getCustomerComment(bookId: any): boolean {
 
 function extractAddressInfo(fullAddress: string) {
   const addressParts = fullAddress.split(',').map(part => part.trim());
-  // Kiểm tra số lượng phần tử trong mảng để đảm bảo đủ thông tin
   if (addressParts.length < 4) {
-    return null; // Địa chỉ không đầy đủ thông tin
+    return null;
   }
-
   const [ap, x, h, t] = addressParts;
 
   return {

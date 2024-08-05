@@ -21,14 +21,12 @@ export class BillsService {
     return this.http.get<any>(`${this.apiUrl}Bills/orderSuccess`)
   }
   postBill(bill: any): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(this.apiUrl, bill, { headers: headers });
+    return this.http.post<any>(`${this.apiUrl}Bills`, bill);
   }
   updateBillStatus(billId: string, status: string) {
     const url = `${this.apiUrl}Bills/${encodeURIComponent(billId)}/${encodeURIComponent(status)}`;
     const body = { status: status };
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put(url, body ,{ headers: headers })
+    return this.http.put(url, body )
   }
   updateBillStatusPayment(billId: string, statuspayment:string) {
     const url = `${this.apiUrl}Bills/update/${encodeURIComponent(billId)}/${encodeURIComponent(statuspayment)}`;
@@ -36,7 +34,7 @@ export class BillsService {
     return this.http.put(url,{ headers: headers })
   }
   getdetailsbill(billId: string) {
-    const url = `${this.apiUrl}Bilss/withorderbill/${encodeURIComponent(billId)}`;
+    const url = `${this.apiUrl}Bills/withorderbill/${encodeURIComponent(billId)}`;
     return this.http.get(url)
   }
 }

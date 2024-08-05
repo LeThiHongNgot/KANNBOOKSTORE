@@ -31,6 +31,7 @@
     "@cloudinary/ng": "^2.0.0",
     "@cloudinary/url-gen": "^1.14.0",
     "@emailjs/browser": "^3.11.0",
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@ng-bootstrap/ng-bootstrap": "^15.1.1",
     "@nguniversal/common": "^16.2.0",
     "@nguniversal/express-engine": "^16.2.0",
@@ -50,7 +51,6 @@
     "slick-carousel": "^1.8.1",
     "tslib": "^2.3.0",
     "web-quan-ly-cua-hang-sach": "file:",
-    "xlsx": "^0.18.5",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {

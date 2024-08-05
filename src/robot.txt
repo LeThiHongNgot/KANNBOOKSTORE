@@ -12,4 +12,4 @@ Allow: /books
 Allow: /product/
 Allow: /category-product
 
-Sitemap: http://localhost:62574/sitemap.xml
+Sitemap: sitemap.xml

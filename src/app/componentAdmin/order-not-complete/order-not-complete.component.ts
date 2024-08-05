@@ -3,7 +3,7 @@ import { BillWithCustomer } from 'src/interfaces/Orders';
 import { SharedataService } from 'src/services/sharedata/sharedata.service';
 import { Router } from '@angular/router';
 import { BillsService } from 'src/services/Bills/bills.service';
-import * as XLSX from 'xlsx';
+// import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-order-not-complete',
   templateUrl: './order-not-complete.component.html',
@@ -75,12 +75,12 @@ export class OrderNotCompleteComponent {
    this.router.navigate(['OrderDetail-admin', id]);
  }
 
-  exportToExcel(): void {
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.orderData);
-    const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer, 'ThongkeSachDaBan');
-  }
+  // exportToExcel(): void {
+  //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.orderData);
+  //   const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+  //   const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  //   this.saveAsExcelFile(excelBuffer, 'ThongkeSachDaBan');
+  // }
 
   private saveAsExcelFile(buffer: any, fileName: string): void {
     const data: Blob = new Blob([buffer], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'});

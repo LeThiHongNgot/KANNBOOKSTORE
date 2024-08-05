@@ -1,6 +1,6 @@
 <div class="product-relatedproduct-bottom" *ngIf="products">
   <div class="cartegory-right-bottom-item" *ngFor="let product of products"
-    (click)="navigateToProduct(product.bookId, product.title)">
+    (click)="navigateToProduct(product.bookId, product.title, product.quantity)">
     <div class="productIMG">
       <img [src]="product.image0">
     </div>
@@ -15,6 +15,9 @@
 
     <div class="product-rating">
       <app-rating-decimal [rating]="product.averageRating"></app-rating-decimal>
+    </div>
+    <div class="soldout-container" *ngIf="product.quantity < 1">
+      <p class="sold-out">HẾT HÀNG!</p>
     </div>
   </div>
 

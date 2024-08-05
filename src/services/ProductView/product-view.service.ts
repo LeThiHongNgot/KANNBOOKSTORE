@@ -34,10 +34,7 @@ export class ProductViewService {
     return this.http.get<any>(url);
   }
 
-  getProductReviewaAveragBookId(id: string) {
-    const url = `${this.apiUrl}ProductReviews/books/averag/${id}`;
-    return this.http.get<any>(url);
-  }
+ 
 
   addProductReview(productReview: any): Observable<ProductView> {
     return this.http.post<ProductView>(this.apiUrl, productReview);

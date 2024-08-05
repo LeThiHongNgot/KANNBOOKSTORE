@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
 import { Customer } from 'src/interfaces/Customer';
 import { CustomermainService } from 'src/services/customermain/customermain.service';
-
+import { OtpService } from 'src/services/otp/otp.service';
 @Component({
   selector: 'app-user-admin',
   templateUrl: './user-admin.component.html',
   styleUrls: ['./user-admin.component.css']
 })
 export class UserAdminComponent {
-  constructor(private customers: CustomermainService) {}
+  constructor(private customers: CustomermainService,
+    private mailchimpService:OtpService
+  ) {}
   Customers: Customer[]=[]
   filterdCustomers: Customer[]=[]
   customer: any = {}
@@ -64,6 +66,18 @@ export class UserAdminComponent {
     }
   }
 
+  exportMailC()
+  {
+    this.mailchimpService.listAccountExports().subscribe({
+      next: res => {
+        this.Customers = res
+        this.loadpro(null)
+      },
+      error: err => {
+        console.log("Lỗi lấy dữ liệu: ", err)
+      }
+    });
+  }
   // Hàm xóa sách
   deleteUser(user: any) {
     console.log('Deleting user:', user);

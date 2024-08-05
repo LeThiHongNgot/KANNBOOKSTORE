@@ -19,10 +19,13 @@ export class ProductslistComponent {
     this.pageChange.emit(this.page);
   }
 
-  navigateToProduct(productId: string, productName: string) {
+  navigateToProduct(productId: string, productName: string, quality:number) {
+   if(quality>=1)
+   {
     const sanitizedProductName = productName.replace(/\s+/g, '-');
     const combined = `${sanitizedProductName}-${productId}`;
     this.router.navigate(['product', combined]);
+   }
   }
   percent1(price: number, per: number): number { return price * (1 - per); }
 

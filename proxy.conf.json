@@ -1,0 +1,11 @@
+{
+  "/mailchimp": {
+    "target": "https://us13.api.mailchimp.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/mailchimp": ""
+    }
+  }
+}

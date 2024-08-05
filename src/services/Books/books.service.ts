@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient ,HttpHeaders} from "@angular/common/http";
-import { Router } from '@angular/router';
+import { HttpClient } from "@angular/common/http";
 import {BookDetailsViewModel} from 'src/interfaces/fullbook';
 import { Observable } from 'rxjs';
 import { environment } from 'src/app/environments/environment';
@@ -11,7 +10,7 @@ export class BooksService {
 
   private baseUrl: string = environment.baseUrl;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
   }
 //get 3 bảng book theo thể loại
   getBookdetailsByCategory(categoryId: string, page: number | null = null, pageSize: number | null = null) {

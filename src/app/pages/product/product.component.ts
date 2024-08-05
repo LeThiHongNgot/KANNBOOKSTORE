@@ -150,7 +150,6 @@ getproductid()
             this.sameCategory(1);
             this.onPageChange(this.page);
             }
-            this.getRatingStatistical()
             this.getProductView();
           },
           error:(err)=>
@@ -160,21 +159,24 @@ getproductid()
         })
     }
 }
-getRatingStatistical()
-{
-  if(this.productId)
-  {
-    this.productView.getProductReviewRatingBookId(this.productId).subscribe({
-      next: (response) => {
-        this.ratingStatistical=response
-        this.totalVotes = this.calculateTotalVotesRatingAcount(this.ratingStatistical);
-      },
-      error: (error: any) => {
-        console.error('', error);
-      }
-    });
-  }
-}
+// getRatingStatistical() {
+//   if (this.productId) {
+//     this.productView.getProductReviewRatingBookId(this.productId).subscribe({
+//       next: (response: any) => {
+//         // Check if the response has a message or no data
+//         if (response.message) {
+//           console.log(response.message);
+//           this.ratingStatistical = [];
+//           this.totalVotes = 0;
+//         } else {
+//           this.ratingStatistical = response;
+//           this.totalVotes = this.calculateTotalVotesRatingAcount(this.ratingStatistical);
+//         }
+//       }
+//     });
+//   }
+// }
+
 sameCategory(page: number) {
   this.books.getBookdetailsByCategory(this.idCategory, page, this.pageSize)
     .subscribe({
@@ -219,9 +221,6 @@ getProductView()
       next: (response) => {
         this.productViewinterface=response
       },
-      error: (error: any) => {
-        console.error('Error loading books:', error);
-      }
     });
   }
 }

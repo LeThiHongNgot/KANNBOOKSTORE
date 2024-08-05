@@ -3,7 +3,7 @@ import { BillWithCustomer} from 'src/interfaces/Orders';
 import { OrdersService } from 'src/services/Orders/orders.service';
 import { SharedataService } from 'src/services/sharedata/sharedata.service';
 import { Router } from '@angular/router';
-import * as XLSX from 'xlsx';
+// import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-revenue-admin',
   templateUrl: './revenue-admin.component.html',

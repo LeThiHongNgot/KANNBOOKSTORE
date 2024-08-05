@@ -293,8 +293,8 @@
                   <tr class="status-payment" *ngIf="bill.paymentStatus !== 'Chưa Thanh Toán'">
                     <td>Phương thức thanh toán: <span>{{bill.paymentStatus}}</span></td>
                     <td rowspan="2" *ngFor="let detail of bill.orderDetails">
-                      <button *ngIf="!bill.isReviewed" mat-raised-button class="save-button" (click)="open(content)">ĐÁNH GIÁ</button>
-                      <button *ngIf="bill.isReviewed" mat-raised-button>Đã đánh giá</button>
+                      <button *ngIf="!getCustomerComment(detail.bookId)"mat-raised-button class="save-button" (click)="open(content)">ĐÁNH GIÁ</button>
+                      <button *ngIf="getCustomerComment(detail.bookId)" mat-raised-button>Đã đánh giá</button>
                     </td>
                   </tr>
                   <tr class="status-payment">

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
-import { HttpClient , HttpParams,} from '@angular/common/http';
+import { HttpClient , HttpParams,HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +14,20 @@ export class OtpService {
   ) {}
   private apiUrl = 'https://api.zerobounce.net/v2/validate'; // URL API của ZeroBounce
   private apiKey = '0d0981ba02824535a6287fba47adec46';
+  private apiKeyMailC = 'c3012bc380ab801143ffcfb01679ab37-us13';
+  private serverPrefix = 'us13';
+  private baseUrl = `https://${this.serverPrefix}.api.mailchimp.com/3.0`;
 
+
+ // Fetch account exports from Mailchimp
+ listAccountExports(): Observable<any> {
+  const url = `${this.baseUrl}/account-exports`;
+  const headers = new HttpHeaders({
+    'Authorization': `Basic ${btoa(`anystring:${this.apiKeyMailC}`)}`,
+    'Content-Type': 'application/json'
+  });
+  return this.http.get<any>(url, { headers });
+}
 
    // Use popup for Google sign-in
    signInWithGoogle() {
