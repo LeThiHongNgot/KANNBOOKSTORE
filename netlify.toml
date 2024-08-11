@@ -3,7 +3,6 @@
   publish = "dist/WebQuanLyCuaHangSach/browser"
   functions = "dist/WebQuanLyCuaHangSach/server"
 
-[redirects]
   [[redirects]]
     from = "/*"
     to = "/index.html"
