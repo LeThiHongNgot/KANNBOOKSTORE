@@ -62,10 +62,6 @@ const routes: Routes = [
     component: ProductComponent,
   },
   {
-    path: 'category-product',
-    component: ProductComponent,
-  },
-  {
     path: 'payment',
     component: PaymentComponent,
     canActivate: [authGuard]
@@ -115,11 +111,6 @@ const routes: Routes = [
   {
     path: 'OrderNotComplete-admin',
     component: OrderNotCompleteComponent,
-    canActivate: [staffAuthGuard]
-  },
-  {
-    path: 'OrderDetail-admin',
-    component: OrderDetailComponent,
     canActivate: [staffAuthGuard]
   },
   {

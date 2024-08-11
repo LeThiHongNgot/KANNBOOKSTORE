@@ -1,13 +1,21 @@
 [build]
-  # Lệnh để xây dựng ứng dụng của bạn
-  command = "npm run build"
-
-  # Thư mục chứa các tệp tĩnh để triển khai
+  command = "npm run build:ssr"
   publish = "dist/WebQuanLyCuaHangSach/browser"
 
 [[redirects]]
-  # Định tuyến tất cả các yêu cầu đến ứng dụng Angular của bạn
   from = "/*"
   to = "/index.html"
   status = 200
-  force = true
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[plugins]]
+  package = "netlify-plugin-angular-universal"
+
+[functions]
+  node_bundler = "esbuild"
+
+[dev]
+  command = "npm run dev:ssr"
+  port = 8080
