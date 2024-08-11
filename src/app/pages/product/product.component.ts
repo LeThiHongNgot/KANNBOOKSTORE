@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { bookimg } from '../../../interfaces/bookimg';
 import { Author } from '../../../interfaces/Author';
@@ -18,6 +18,7 @@ import {BookDetailsViewModel} from 'src/interfaces/fullbook';
 import { ProductViewService } from 'src/services/ProductView/product-view.service';
 import { ProductReviewBookid } from 'src/interfaces/ProductView';
 import { environment } from 'src/app/environments/environment';
+declare var FB: any;
 import { Meta, Title } from '@angular/platform-browser';@Component({ selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
@@ -71,7 +72,11 @@ export class ProductComponent implements OnInit {
       config.backdrop = 'static';
       config.keyboard = false;
     }
-
+    ngAfterViewInit() {
+      if (FB) {
+        FB.XFBML.parse();
+      }
+    }
     //modal-rating
    open(content:any)
     {
