@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  //baseUrl: "https://quanlycuahangsach.azurewebsites.net/api",
-  baseUrl: "https://localhost:7009/api/",
+  baseUrl: "https://quanlycuahangsach.azurewebsites.net/api",
+  //baseUrl: "https://localhost:7009/api/",
   firebaseConfig:
   {
     apiKey: "AIzaSyB8K_ggTJEaAMtANChnFkB1TuexTE4ysnY",
