@@ -51,7 +51,7 @@ export class MailchimpService {
   private baseUrl = `https://${this.serverPrefix}.api.mailchimp.com/3.0`;
 
   private headers = new HttpHeaders({
-    'Authorization': `Bearer ${this.apiKey}`,
+    'Authorization': `Basic ${btoa('anystring:' + this.apiKey)}`,
     'Content-Type': 'application/json'
   });
 

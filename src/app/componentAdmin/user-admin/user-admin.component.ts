@@ -65,9 +65,13 @@ export class UserAdminComponent {
   accountExports: any;
   getAccountExports() {
     this.mailchimpService.listAccountExports().subscribe({
-      next: res => {
-        this.accountExports = res
-        console.log('Account Exports:', res);
+      next: (response: Blob) => {
+        const url = window.URL.createObjectURL(response);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'account-exports.json';
+        link.click();
+        window.URL.revokeObjectURL(url);
       },
       error: err => {
         console.error('Error:', err);

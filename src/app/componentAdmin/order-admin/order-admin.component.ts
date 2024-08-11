@@ -25,7 +25,6 @@ export class OrderAdminComponent {
   this.bill.getbill().subscribe({
     next: res => {
       this.orderData=res
-      console.log(res)
     },
     error: err => {
       console.log("Lỗi lấy dữ liệu: ", err)
