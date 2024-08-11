@@ -20,7 +20,7 @@ export class UsersService {
       body: `
           <p>Hi there,</p>
           <p>Here are your account details:</p>
-          <p><strong>Username:</strong> <span style="color: blue;">${username}</span></p>
+          <p><strong>Username:</strong> <span style="color: blue;">${toEmail}</span></p>
           <p><strong>Password:</strong> <span style="color: red;">${password}</span></p>
           <p>Please keep this information safe and secure.</p>
           <p>Best regards,<br>Your Company BookStore2N</p>

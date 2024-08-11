@@ -26,8 +26,6 @@ export class ModalAddStaffComponent {
       Phone: this.DataStaff.Phone,
       Role: this.DataStaff.Role
     };
-console.log(dataStaff)
-
     this.otpService.validateEmail(this.DataStaff.Email).subscribe({
       next: (data) => {
 
