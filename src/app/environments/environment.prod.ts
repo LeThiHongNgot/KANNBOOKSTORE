@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl: "https://quanlycuahangsach.azurewebsites.net/api",
+  baseUrl: "https://quanlycuahangsach.azurewebsites.net/api/",
   //baseUrl: "https://localhost:7009/api/",
   firebaseConfig:
   {
