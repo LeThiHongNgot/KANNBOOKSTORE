@@ -15,7 +15,7 @@
             </button>
             <div class="dropdown" id="dropdown" *ngIf="filteredProducts">
                 <div class="cartegory-right-bottom-item" *ngFor="let product of filteredProducts"
-                    (click)="navigateToProduct(product.bookId, product.title, product.quantity || 0)">
+                    (click)="navigateToProduct(product.bookId, product.title)">
                     <div class="productIMG" >
                         <img [src]="product.image0">
 

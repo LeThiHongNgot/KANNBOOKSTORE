@@ -1,7 +1,7 @@
 import { Component, ElementRef, NgZone, OnInit, Renderer2 } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { Router } from '@angular/router';
-import { SharedataService } from 'src/services/sharedata/sharedata.service';
+import { VnPayPaymentService } from 'src/services/vn-pay-payment.service';
 import { BooksService } from 'src/services/Books/books.service';
 import { BookDetailsViewModel } from 'src/interfaces/fullbook';
 import { CustomermainService } from 'src/services/customermain/customermain.service';
@@ -59,7 +59,8 @@ export class PaymentComponent implements OnInit {
     private ngZone: NgZone,// Inject NgZone
     private billservice: BillsService,
     private route: ActivatedRoute,
-    private cartService: CartsService
+    private cartService: CartsService,
+    private  vnPayPaymentService: VnPayPaymentService
   ) {
 
     this.route.queryParams.subscribe(params => {
@@ -103,6 +104,25 @@ export class PaymentComponent implements OnInit {
     this.loadVouchers();
   }
 
+  onPay() {
+    if (this.selectedPaymentMethod === 'Vnpay') {
+      const order = {
+        order_id: '123456', // Mã đơn hàng
+        amount: 100000, // Số tiền
+      };
+
+      const paymentUrl = this.vnPayPaymentService.createPaymentUrl(order);
+      window.location.href = paymentUrl; // Chuyển hướng người dùng đến trang thanh toán
+    } else {
+      // Xử lý cho các phương thức thanh toán khác (nếu cần)
+      console.log('Phương thức thanh toán khác được chọn');
+    }
+  }
+  getExpireDate(): string {
+    const date = new Date();
+    date.setMinutes(date.getMinutes() + 15); // Đặt thời hạn đơn hàng là 15 phút sau khi tạo
+    return this.vnPayPaymentService.formatDate(date);
+  }
   displayPaymentSection(display: boolean) {
     const payment = this.ele.nativeElement.querySelector('#ment');
     if (payment) {
@@ -158,7 +178,11 @@ export class PaymentComponent implements OnInit {
       setTimeout(() => {
         this.renderPaypalButton();
       });
+    }else
+    {
+      this.onPay()
     }
+    
   }
 
   renderPaypalButton() {
